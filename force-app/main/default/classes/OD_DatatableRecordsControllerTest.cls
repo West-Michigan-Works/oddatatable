@@ -171,7 +171,7 @@ public class OD_DatatableRecordsControllerTest {
       true,
       'Contact',
       'FirstName,LastName',
-      '[{"LastName": "Created 1"},{"LastName": "Created 2"}]',
+      '[{"LastName": "Created 1", "FirstName": "Test 1"},{"LastName": "Created 2", "FirstName": "Test 2"}]',
       '[{ "Id": "' + contacts[0].Id + '", "LastName": "LastName Updated"}]',
       '[{ "Id": "' + contacts[1].Id + '"}]',
       false
@@ -199,7 +199,7 @@ public class OD_DatatableRecordsControllerTest {
         true,
         null,
         'FirstName,LastName',
-        '[{"LastName": "Created 1"},{"LastName": "Created 2"}]',
+        '[{"LastName": "Created 1", "FirstName": "Test 1"},{"LastName": "Created 2", "FirstName": "Test 2"}]',
         '[{ "Id": "' + contacts[0].Id + '", "LastName": "LastName Updated"}]',
         '[{ "Id": "' + contacts[1].Id + '"}]',
         false
@@ -543,7 +543,7 @@ public class OD_DatatableRecordsControllerTest {
       false,
       'Contact',
       'FirstName,LastName',
-      '[{"LastName": "Created 1"},{"LastName": "Created 2"}]',
+      '[{"LastName": "Created 1", "FirstName": "Test 1"},{"LastName": "Created 2", "FirstName": "Test 2"}]',
       '[{ "Id": "' + contacts[0].Id + '", "LastName": "LastName Updated"}]',
       '[{ "Id": "' + contacts[1].Id + '"}]',
       false
@@ -571,7 +571,7 @@ public class OD_DatatableRecordsControllerTest {
         false,
         null,
         'FirstName,LastName',
-        '[{"LastName": "Created 1"},{"LastName": "Created 2"}]',
+        '[{"LastName": "Created 1", "FirstName": "Test 1"},{"LastName": "Created 2", "FirstName": "Test 2"}]',
         '[{ "Id": "' + contacts[0].Id + '", "LastName": "LastName Updated"}]',
         '[{ "Id": "' + contacts[1].Id + '"}]',
         false
