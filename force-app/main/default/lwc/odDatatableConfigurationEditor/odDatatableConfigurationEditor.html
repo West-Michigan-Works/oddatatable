@@ -89,6 +89,19 @@
       >
       </c-od-datatable-input-generic>
       <c-od-datatable-input-generic
+        field-name="displayNoRecordsMessage"
+        type={inputValues.displayNoRecordsMessage.type}
+        editable
+        toggle-value-active={yesNo.YES}
+        toggle-value-inactive={yesNo.NO}
+        class="slds-size--1-of-1"
+        value={inputValues.displayNoRecordsMessage.value}
+        label={inputValues.displayNoRecordsMessage.label}
+        onupdatefield={handleInputChange}
+        help-text={inputValues.displayNoRecordsMessage.helpText}
+      >
+      </c-od-datatable-input-generic>
+      <c-od-datatable-input-generic
         field-name="showRowNumberColumn"
         type={inputValues.showRowNumberColumn.type}
         editable={showRowNumberEditable}
