@@ -66,6 +66,7 @@ export default class ODDatatable extends LightningElement {
   @api objectName;
   @api columns;
   @api noRecordsMessage;
+  @api displayNoRecordsMessage;
   @api showRowNumberColumn;
 
   // sharing
@@ -596,6 +597,10 @@ export default class ODDatatable extends LightningElement {
     }
 
     return result;
+  }
+
+  get displayTableData() {
+    return this.displayNoRecordsMessage === YES_NO.NO || this.tableData.length > 0;
   }
 
   get isFirstPage() {

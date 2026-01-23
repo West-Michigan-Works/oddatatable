@@ -107,6 +107,10 @@ export default class OdDatatableRelatedList extends LightningElement {
     return this._configuration.noRecordsMessage ? this._configuration.noRecordsMessage.value : '';
   }
 
+  get displayNoRecordsMessage() {
+    return this._configuration.displayNoRecordsMessage ? this._configuration.displayNoRecordsMessage.value : YES_NO.YES;
+  }
+
   get showRowNumberColumn() {
     return this._configuration.showRowNumberColumn ? this._configuration.showRowNumberColumn.value : YES_NO.NO;
   }

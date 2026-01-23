@@ -41,6 +41,14 @@
         description="Message to display instead of the datatable if there are no records."
       />
             <property
+        name="displayNoRecordsMessage"
+        label="Show No Records Message"
+        type="String"
+        role="inputOnly"
+        default="Yes"
+        description="Display No Record Message instead of the datatable if there are no records."
+      />
+            <property
         name="canAdd"
         label="Can Add?"
         type="String"

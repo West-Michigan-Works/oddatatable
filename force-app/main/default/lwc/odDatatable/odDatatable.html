@@ -35,7 +35,7 @@
     </template>
 
     <!-- Table or no records message -->
-    <template lwc:if={tableData.length}>
+    <template lwc:if={displayTableData}>
       <c-od-datatable-custom
         key-field="_id"
         class="od-datatable"
