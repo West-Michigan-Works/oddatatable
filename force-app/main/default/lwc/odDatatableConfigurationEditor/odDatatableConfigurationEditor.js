@@ -1035,7 +1035,11 @@ export default class OdConfigurationEditor extends LightningElement {
       // get the one from variables
       const variable = this._inputVariables.find((vr) => vr.name === key);
 
-      if (this.inputValues[key].value !== undefined && ((variable && variable.value === undefined) || !variable)) {
+      if (
+        this.inputValues[key].value !== undefined &&
+        variable &&
+        (variable.value === undefined || this.inputValues[key].value !== variable.value)
+      ) {
         const detail = {
           name: key,
           newValue: this.inputValues[key].value,
