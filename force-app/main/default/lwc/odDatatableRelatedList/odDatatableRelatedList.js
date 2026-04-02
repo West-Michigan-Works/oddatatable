@@ -12,6 +12,7 @@ export default class OdDatatableRelatedList extends LightningElement {
   @api relatedObjectApiName;
   @api fieldApiName;
   @api customMetadataName;
+  @api lockParentFields;
 
   @track data;
   @track _configuration;
@@ -50,7 +51,7 @@ export default class OdDatatableRelatedList extends LightningElement {
   }
 
   _fetchLockStatus() {
-    getLockStatus({ objectId: this.recordId })
+    getLockStatus({ objectId: this.recordId, parentFields: this.lockParentFields || '' })
       .then((result) => {
         this.isLocked = result;
         this._lockStatusInitialized = true;
@@ -143,8 +144,8 @@ export default class OdDatatableRelatedList extends LightningElement {
 
   @api
   get canAdd() {
-    //return this._configuration.canAdd ? this._configuration.canAdd.value : YES_NO.NO;
-    return !this.isLocked;
+    if (this.isLocked || !this._configuration) return false;
+    return this._configuration.canAdd ? this._configuration.canAdd.value : YES_NO.NO;
   }
 
   get addLabel() {
@@ -165,8 +166,8 @@ export default class OdDatatableRelatedList extends LightningElement {
 
   @api
   get canEdit() {
-    // return this._configuration.canEdit ? this._configuration.canEdit.value : YES_NO.NO;
-    return !this.isLocked;
+    if (this.isLocked || !this._configuration) return false;
+    return this._configuration.canEdit ? this._configuration.canEdit.value : YES_NO.NO;
   }
 
   get editType() {
@@ -187,8 +188,8 @@ export default class OdDatatableRelatedList extends LightningElement {
 
   @api
   get canDelete() {
-    // return this._configuration.canDelete ? this._configuration.canDelete.value : YES_NO.NO;
-    return !this.isLocked;
+    if (this.isLocked || !this._configuration) return false;
+    return this._configuration.canDelete ? this._configuration.canDelete.value : YES_NO.NO;
   }
 
   get canBulkDelete() {
@@ -221,8 +222,8 @@ export default class OdDatatableRelatedList extends LightningElement {
 
   @api
   get inlineSave() {
-    // return this._configuration.inlineSave ? this._configuration.inlineSave.value : YES_NO.NO;
-    return !this.isLocked;
+    if (this.isLocked || !this._configuration) return false;
+    return this._configuration.inlineSave ? this._configuration.inlineSave.value : YES_NO.NO;
   }
 
   get saveLabel() {

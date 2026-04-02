@@ -127,4 +127,33 @@ public without sharing class OD_DatatableConfigurationController {
       throw e;
     }
   }
+
+  @AuraEnabled(cacheable=false)
+  public static Boolean getLockStatus(Id objectId, String parentFields) {
+    if (Approval.isLocked(objectId)) {
+      return true;
+    }
+
+    if (String.isBlank(parentFields)) {
+      return false;
+    }
+
+    List<String> fields = parentFields.split(',');
+    for (Integer i = 0; i < fields.size(); i++) {
+      fields[i] = fields[i].trim();
+    }
+
+    String objectName = objectId.getSObjectType().getDescribe().getName();
+    String query = 'SELECT ' + String.join(fields, ', ') + ' FROM ' + objectName + ' WHERE Id = :objectId LIMIT 1';
+    SObject record = Database.query(query);
+
+    for (String field : fields) {
+      Id parentId = (Id) record.get(field);
+      if (parentId != null && Approval.isLocked(parentId)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }

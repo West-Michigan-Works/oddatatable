@@ -20,6 +20,8 @@
             <property name="customMetadataName" type="String" label="Custom Metadata Name"
                 required="true"
                 description="This is the custom metadata name that contains the configuration in JSON format. You need to build the table in a flow and use the Copy Configuration Button which will copy the configuration to the clipboard, then create a custom metadata record (OD_Datatable_JSON_Configuration__mdt) and use the Name here." />
+            <property name="lockParentFields" type="String" label="Lock Parent Fields"
+                description="Comma-separated lookup/master-detail field API names to check for approval locks on parent records. e.g. Launchpad__Enrollment__c. Leave blank to only check the current record." />
         </targetConfig>
         <targetConfig targets="lightningCommunity__Default">
             <property name="recordId"
@@ -34,6 +36,8 @@
             <property name="customMetadataName" type="String" label="Custom Metadata Name"
                 required="true"
                 description="This is the custom metadata name that contains the configuration in JSON format. You need to build the table in a flow and use the Copy Configuration Button which will copy the configuration to the clipboard, then create a custom metadata record (OD_Datatable_JSON_Configuration__mdt) and use the Name here." />
+            <property name="lockParentFields" type="String" label="Lock Parent Fields"
+                description="Comma-separated lookup/master-detail field API names to check for approval locks on parent records. e.g. Launchpad__Enrollment__c. Leave blank to only check the current record." />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
