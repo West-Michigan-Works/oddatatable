@@ -10,21 +10,21 @@
       <fieldset class="slds-box slds-grid slds-wrap">
         <legend>Flow Input Variables</legend>
         <c-od-datatable-error error-message={errorMessage}></c-od-datatable-error>
-        <div class="slds-m-bottom--large slds-m-top--medium slds-p-around--xx-small slds-size--1-of-1">
+        <div class="slds-m-bottom_large slds-m-top_medium slds-p-around_xx-small slds-size_1-of-1">
           <table class="columnsTable" style="display: table">
             <thead>
               <tr>
-                <th class="slds-p-around--x-small" style="width: 300px">Input Variable Name</th>
-                <th class="slds-p-around--x-small" style="width: 150px">Type</th>
-                <th class="slds-p-around--x-small" style="width: 300px">
+                <th class="slds-p-around_x-small" style="width: 300px">Input Variable Name</th>
+                <th class="slds-p-around_x-small" style="width: 150px">Type</th>
+                <th class="slds-p-around_x-small" style="width: 300px">
                   Value
                   <lightning-helptext
                     class="help-text"
                     content="You need to select a formula, constant or variable to pre-populate the input field that will go through to the selected flow"
                   ></lightning-helptext>
                 </th>
-                <th class="slds-p-around--x-small" style="width: 300px">Fixed value</th>
-                <th class="slds-p-around--x-small" style="width: 50px"></th>
+                <th class="slds-p-around_x-small" style="width: 300px">Fixed value</th>
+                <th class="slds-p-around_x-small" style="width: 50px"></th>
               </tr>
             </thead>
             <tbody class="">
@@ -102,7 +102,7 @@
                   </td>
                   <td>
                     <template lwc:if={input.showEmptyValueOptions}>
-                      <span class="slds-p-around--xx-small slds-m-left--xx-small">
+                      <span class="slds-p-around_xx-small slds-m-left_xx-small">
                         There aren't any formula, constant or variable with the selected type.
                       </span>
                     </template>
@@ -135,7 +135,7 @@
                     >
                     </c-od-datatable-input-generic>
                   </td>
-                  <td class="slds-text-align--center">
+                  <td class="slds-text-align_center">
                     <lightning-button-icon
                       icon-name="utility:delete"
                       variant="bare"
@@ -150,7 +150,7 @@
               </template>
             </tbody>
           </table>
-          <div class="slds-size--1-of-1 slds-p-top--small">
+          <div class="slds-size_1-of-1 slds-p-top_small">
             <lightning-button
               label="Add Input Variable"
               title="Add Input Variable"
@@ -161,16 +161,16 @@
           </div>
         </div>
       </fieldset>
-      <fieldset class="slds-box slds-grid slds-wrap slds-m-top--medium">
+      <fieldset class="slds-box slds-grid slds-wrap slds-m-top_medium">
         <legend>Flow Output Variables</legend>
-        <div class="slds-m-top--medium slds-p-around--xx-small slds-size--1-of-1">
+        <div class="slds-m-top_medium slds-p-around_xx-small slds-size_1-of-1">
           <table class="columnsTable" style="display: table">
             <thead>
               <tr>
-                <th class="slds-p-around--x-small" style="width: 300px">Output Variable Name</th>
-                <th class="slds-p-around--x-small" style="width: 150px">Type</th>
-                <th class="slds-p-around--x-small" style="width: 300px">SObject</th>
-                <th class="slds-p-around--x-small" style="width: 300px">Description</th>
+                <th class="slds-p-around_x-small" style="width: 300px">Output Variable Name</th>
+                <th class="slds-p-around_x-small" style="width: 150px">Type</th>
+                <th class="slds-p-around_x-small" style="width: 300px">SObject</th>
+                <th class="slds-p-around_x-small" style="width: 300px">Description</th>
               </tr>
             </thead>
             <tbody>
@@ -252,7 +252,7 @@
       </fieldset>
     </div>
     <div slot="footer" class="footer-popup slds-grid">
-      <div class="slds-align--absolute-center slds-size--12-of-12">
+      <div class="slds-align_absolute-center slds-size_12-of-12">
         <lightning-button
           variant="brand"
           disabled={disabledSave}
@@ -260,7 +260,7 @@
           label="Save"
           title="Save"
           onclick={handleSave}
-          class="slds-m-right--large"
+          class="slds-m-right_large"
         >
         </lightning-button>
         <lightning-button name="cancel" label="Cancel" title="Cancel" onclick={handleClose}> </lightning-button>

@@ -6,14 +6,14 @@
     modal-classes="overFlowInitial onTopOfEverything"
   >
     <div slot="title" class="title-popup">Group Bottom Navigation Buttons</div>
-    <div slot="body" class="slds-p-around--large">
+    <div slot="body" class="slds-p-around_large">
       <c-od-datatable-error error-message={errorMessage}></c-od-datatable-error>
-      <div class="slds-m-bottom--large slds-m-top--medium slds-p-around--xx-small slds-size--1-of-1">
+      <div class="slds-m-bottom_large slds-m-top_medium slds-p-around_xx-small slds-size_1-of-1">
         <table class="columnsTable" style="display: table">
           <thead>
             <tr>
-              <th class="slds-p-around--x-small" style="width: 300px">Label</th>
-              <th class="slds-p-around--x-small" style="width: 150px">
+              <th class="slds-p-around_x-small" style="width: 300px">Label</th>
+              <th class="slds-p-around_x-small" style="width: 150px">
                 Main Button?
                 <lightning-helptext
                   class="help-text"
@@ -21,7 +21,7 @@
                 >
                 </lightning-helptext>
               </th>
-              <th class="slds-p-around--x-small" style="width: 300px">Group Under</th>
+              <th class="slds-p-around_x-small" style="width: 300px">Group Under</th>
             </tr>
           </thead>
           <tbody class="">
@@ -41,7 +41,7 @@
                     type={fieldTypes.CHECKBOX}
                     field-name="mainButton"
                     data-value={btn.value}
-                    class="slds-text-align--center"
+                    class="slds-text-align_center"
                     value={btn.mainButton}
                     editable={btn.canBeMainButton}
                     onupdatefield={handleUpdateMainButton}
@@ -76,14 +76,14 @@
       </div>
     </div>
     <div slot="footer" class="footer-popup slds-grid">
-      <div class="slds-align--absolute-center slds-size--12-of-12">
+      <div class="slds-align_absolute-center slds-size_12-of-12">
         <lightning-button
           variant="brand"
           name="save"
           label="Save"
           title="Save"
           onclick={handleSave}
-          class="slds-m-right--large"
+          class="slds-m-right_large"
         >
         </lightning-button>
         <lightning-button name="cancel" label="Cancel" title="Cancel" onclick={handleClose}> </lightning-button>

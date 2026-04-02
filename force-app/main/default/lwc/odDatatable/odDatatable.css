@@ -1,5 +1,5 @@
 :host {
-  --lwc-tableColorBackgroundHeader: rgb(243, 243, 243);
+  --slds-g-color-surface-container-2: rgb(243, 243, 243);
   --slds-c-button-neutral-color-border: rgb(201 201 201);
 }
 
@@ -16,7 +16,7 @@
 .save-inline-buttons {
   position: sticky;
   bottom: -1rem;
-  padding: 0.5rem;
+  padding: var(--slds-g-spacing-2, 0.5rem);
   background: white;
   border-top: 1px solid rgb(201 201 201);
   z-index: 99999;

@@ -40,6 +40,7 @@ export default class OdConfigurationColumns extends LightningElement {
   @track fieldsToDisplayTable = [];
   @track fields = [];
   @track booleanFields = [];
+  @track booleanFlowVariables = [];
 
   @track selectedFields = [];
 
@@ -89,6 +90,7 @@ export default class OdConfigurationColumns extends LightningElement {
       this._selectFields();
 
       this._buildFieldsAvailable();
+      this.booleanFlowVariables = this.builderContext ? this._buildOptionsFromFlow('boolean') : [];
     } else {
       this.errorMessage = 'At least 1 field is required to be able to do Column Configuration';
     }
@@ -123,6 +125,7 @@ export default class OdConfigurationColumns extends LightningElement {
   get showGroupButtonsButton() {
     return this.bottomNavigationButtons.length > 1;
   }
+
 
   // =================================================================
   // private methods
@@ -299,7 +302,11 @@ export default class OdConfigurationColumns extends LightningElement {
           hidden: col.typeAttributes.config.hidden,
           hiddenType: col.typeAttributes.config.hiddenType,
           hiddenConditionField: col.typeAttributes.config.hiddenConditionField,
+          hiddenConditionVariable: col.typeAttributes.config.hiddenConditionVariable,
+          hiddenConditionExpression: col.typeAttributes.config.hiddenConditionExpression,
           hiddenIsRecordBased: col.typeAttributes.config.hiddenType === HIDDEN_TYPE_OPTIONS.RECORD.value,
+          hiddenIsFlowVariable: col.typeAttributes.config.hiddenType === HIDDEN_TYPE_OPTIONS.FLOW_VARIABLE.value,
+          hiddenIsExpression: col.typeAttributes.config.hiddenType === HIDDEN_TYPE_OPTIONS.EXPRESSION.value,
           summarize: col.typeAttributes.config.summarize,
           summarizeType: col.typeAttributes.config.summarizeType,
           buttonVariant: col.typeAttributes.config.buttonVariant,
@@ -556,9 +563,10 @@ export default class OdConfigurationColumns extends LightningElement {
       (fieldName !== 'hidden' && this.selectedFields[fieldIndexSelected].hidden)
     ) {
       // check the hidden type
-      objectToUpdate.hiddenIsRecordBased =
-        (objectToUpdate.hiddenType || this.selectedFields[fieldIndexSelected].hiddenType) ===
-        HIDDEN_TYPE_OPTIONS.RECORD.value;
+      const currentHiddenType = objectToUpdate.hiddenType || this.selectedFields[fieldIndexSelected].hiddenType;
+      objectToUpdate.hiddenIsRecordBased = currentHiddenType === HIDDEN_TYPE_OPTIONS.RECORD.value;
+      objectToUpdate.hiddenIsFlowVariable = currentHiddenType === HIDDEN_TYPE_OPTIONS.FLOW_VARIABLE.value;
+      objectToUpdate.hiddenIsExpression = currentHiddenType === HIDDEN_TYPE_OPTIONS.EXPRESSION.value;
     }
 
     this.selectedFields[fieldIndexSelected] = {
@@ -613,6 +621,8 @@ export default class OdConfigurationColumns extends LightningElement {
             alignment: field.alignment || ALIGNMENT_OPTIONS.LEFT.value,
             hidden: field.hidden,
             hiddenConditionField: field.hiddenConditionField,
+            hiddenConditionVariable: field.hiddenConditionVariable,
+            hiddenConditionExpression: field.hiddenConditionExpression,
             hiddenType: field.hiddenType || HIDDEN_TYPE_OPTIONS.COLUMN.value,
             summarize: field.summarize,
             summarizeType: field.summarizeType,

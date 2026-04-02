@@ -36,14 +36,14 @@
             onblur={handleOnBlurDropdown}
             top-position-shift={dropdownTopPositionShift}
             with-sharing={withSharing}
-            class="slds-p-around--xx-small slds-size--1-of-1 select editable"
+            class="slds-p-around_xx-small slds-size_1-of-1 select editable"
           >
           </c-od-datatable-input-autocomplete>
         </template>
         <template lwc:else>
           <template lwc:if={isMulti}>
             <lightning-formatted-text
-              class="slds-p-around--xx-small slds-size--1-of-1 slds-m-left--xx-small displayValue"
+              class="slds-p-around_xx-small slds-size_1-of-1 slds-m-left_xx-small displayValue"
               id={fieldName}
               value={theValue}
             >
@@ -59,7 +59,7 @@
               options={theOptions}
               object-name={parentObjectName}
               server-side-configuration={lookupConfiguration}
-              class="slds-p-around--xx-small slds-size--1-of-1 displayValue"
+              class="slds-p-around_xx-small slds-size_1-of-1 displayValue"
             >
             </c-od-datatable-input-autocomplete>
           </template>
@@ -82,7 +82,7 @@
       <template lwc:elseif={isToggle}>
         <lightning-input
           id={fieldName}
-          class="slds-p-around--xx-small toggle editable"
+          class="slds-p-around_xx-small toggle editable"
           onchange={handleChangeToggle}
           label={labelToggle}
           message-toggle-active={toggleValueActive}
@@ -99,7 +99,7 @@
         <template lwc:if={editable}>
           <lightning-input
             id={fieldName}
-            class="slds-p-around--xx-small slds-size--1-of-1 currency editable"
+            class="slds-p-around_xx-small slds-size_1-of-1 currency editable"
             autocomplete="off"
             variant="label-hidden"
             type="number"
@@ -123,7 +123,7 @@
             format-style="currency"
             currency-code={currencyCode}
             minimum-fraction-digits={decimalsFormat}
-            class="slds-p-around--xx-small slds-size--1-of-1 slds-m-left--xx-small displayValue"
+            class="slds-p-around_xx-small slds-size_1-of-1 slds-m-left_xx-small displayValue"
           >
           </lightning-formatted-number>
         </template>
@@ -131,7 +131,7 @@
       <template lwc:elseif={isNumber}>
         <template lwc:if={editable}>
           <lightning-input
-            class="slds-p-around--xx-small slds-size--1-of-1 number editable"
+            class="slds-p-around_xx-small slds-size_1-of-1 number editable"
             id={fieldName}
             autocomplete="off"
             onchange={handleChangeNumber}
@@ -152,7 +152,7 @@
           <lightning-formatted-number
             id={fieldName}
             minimum-fraction-digits={decimalsFormat}
-            class="slds-p-around--xx-small slds-size--1-of-1 slds-m-left--xx-small displayValue"
+            class="slds-p-around_xx-small slds-size_1-of-1 slds-m-left_xx-small displayValue"
             value={theValue}
           >
           </lightning-formatted-number>
@@ -162,7 +162,7 @@
         <template lwc:if={editable}>
           <lightning-input
             id={fieldName}
-            class="slds-p-around--xx-small slds-size--1-of-1 percentage editable"
+            class="slds-p-around_xx-small slds-size_1-of-1 percentage editable"
             autocomplete="off"
             onchange={handleChangeDecimal}
             variant="label-hidden"
@@ -185,7 +185,7 @@
             value={theValue}
             format-style="percent-fixed"
             minimum-fraction-digits={decimalsFormat}
-            class="slds-p-around--xx-small slds-size--1-of-1 slds-m-left--xx-small displayValue"
+            class="slds-p-around_xx-small slds-size_1-of-1 slds-m-left_xx-small displayValue"
           >
           </lightning-formatted-number>
         </template>
@@ -193,7 +193,7 @@
       <template lwc:elseif={isDate}>
         <template lwc:if={editable}>
           <lightning-input
-            class="slds-p-around--xx-small slds-size--1-of-1 date editable"
+            class="slds-p-around_xx-small slds-size_1-of-1 date editable"
             id={fieldName}
             autocomplete="off"
             onchange={handleChangeInput}
@@ -213,7 +213,7 @@
         <template lwc:else>
           <lightning-formatted-date-time
             value={theValue}
-            class="slds-p-around--xx-small slds-size--1-of-1 slds-m-left--xx-small displayValue"
+            class="slds-p-around_xx-small slds-size_1-of-1 slds-m-left_xx-small displayValue"
             id={fieldName}
             year="numeric"
             month="2-digit"
@@ -225,7 +225,7 @@
       <template lwc:elseif={isDatetime}>
         <template lwc:if={editable}>
           <lightning-input
-            class="slds-p-around--xx-small slds-size--1-of-1 datetime editable"
+            class="slds-p-around_xx-small slds-size_1-of-1 datetime editable"
             id={fieldName}
             autocomplete="off"
             onchange={handleChangeInput}
@@ -245,7 +245,7 @@
         <template lwc:else>
           <lightning-formatted-date-time
             value={theValue}
-            class="slds-p-around--xx-small slds-size--1-of-1 slds-m-left--xx-small displayValue"
+            class="slds-p-around_xx-small slds-size_1-of-1 slds-m-left_xx-small displayValue"
             id={fieldName}
             year="numeric"
             month="2-digit"
@@ -260,7 +260,7 @@
         <template lwc:if={editable}>
           <lightning-input-rich-text
             id={fieldName}
-            class="slds-p-around--xx-small slds-size--1-of-1 richText editable"
+            class="slds-p-around_xx-small slds-size_1-of-1 richText editable"
             variant="label-hidden"
             data-name={fieldName}
             value={theValue}
@@ -277,7 +277,7 @@
         <template lwc:else>
           <lightning-formatted-rich-text
             id={fieldName}
-            class="slds-p-around--xx-small slds-size--1-of-1 slds-m-left--xx-small displayValue"
+            class="slds-p-around_xx-small slds-size_1-of-1 slds-m-left_xx-small displayValue"
             value={theValue}
           >
           </lightning-formatted-rich-text>
@@ -287,7 +287,7 @@
         <template lwc:if={editable}>
           <lightning-textarea
             id={fieldName}
-            class="slds-p-around--xx-small slds-size--1-of-1 textArea editable"
+            class="slds-p-around_xx-small slds-size_1-of-1 textArea editable"
             autocomplete="off"
             variant="label-hidden"
             data-name={fieldName}
@@ -299,7 +299,7 @@
           >
           </lightning-textarea>
           <template lwc:if={showCharacterCount}>
-            <div class="slds-size--1-of-1 slds-text-align--right slds-text-body_small remainingCharacters">
+            <div class="slds-size_1-of-1 slds-text-align_right slds-text-body_small remainingCharacters">
               {characterCount}
             </div>
           </template>
@@ -307,7 +307,7 @@
         <template lwc:else>
           <lightning-formatted-rich-text
             id={fieldName}
-            class="slds-p-around--xx-small slds-size--1-of-1 slds-m-left--xx-small displayValue"
+            class="slds-p-around_xx-small slds-size_1-of-1 slds-m-left_xx-small displayValue"
             value={theValue}
           >
           </lightning-formatted-rich-text>
@@ -329,7 +329,7 @@
       <template lwc:else>
         <template lwc:if={editable}>
           <lightning-input
-            class="slds-p-around--xx-small slds-size--1-of-1 text editable"
+            class="slds-p-around_xx-small slds-size_1-of-1 text editable"
             type={theType}
             value={theValue}
             label=" "
@@ -346,7 +346,7 @@
           >
           </lightning-input>
           <template lwc:if={showCharacterCount}>
-            <div class="slds-size--1-of-1 slds-text-align--right slds-text-body_small remainingCharacters">
+            <div class="slds-size_1-of-1 slds-text-align_right slds-text-body_small remainingCharacters">
               {characterCount}
             </div>
           </template>
@@ -354,7 +354,7 @@
         <template lwc:else>
           <template lwc:if={isUrl}>
             <lightning-formatted-url
-              class="slds-p-around--xx-small slds-size--1-of-1 slds-m-left--xx-small displayValue"
+              class="slds-p-around_xx-small slds-size_1-of-1 slds-m-left_xx-small displayValue"
               value={theValue}
               target="_blank"
             >
@@ -362,28 +362,28 @@
           </template>
           <template lwc:elseif={isPhone}>
             <lightning-formatted-phone
-              class="slds-p-around--xx-small slds-size--1-of-1 slds-m-left--xx-small displayValue"
+              class="slds-p-around_xx-small slds-size_1-of-1 slds-m-left_xx-small displayValue"
               value={theValue}
             >
             </lightning-formatted-phone>
           </template>
           <template lwc:elseif={isEmail}>
             <lightning-formatted-email
-              class="slds-p-around--xx-small slds-size--1-of-1 slds-m-left--xx-small displayValue"
+              class="slds-p-around_xx-small slds-size_1-of-1 slds-m-left_xx-small displayValue"
               value={theValue}
             >
             </lightning-formatted-email>
           </template>
           <template lwc:elseif={isTextWithHTML}>
             <lightning-formatted-rich-text
-              class="slds-p-around--xx-small slds-size--1-of-1 slds-m-left--xx-small displayValue"
+              class="slds-p-around_xx-small slds-size_1-of-1 slds-m-left_xx-small displayValue"
               value={theValue}
             >
             </lightning-formatted-rich-text>
           </template>
           <template lwc:else>
             <lightning-formatted-text
-              class="slds-p-around--xx-small slds-size--1-of-1 slds-m-left--xx-small displayValue"
+              class="slds-p-around_xx-small slds-size_1-of-1 slds-m-left_xx-small displayValue"
               value={theValue}
             ></lightning-formatted-text>
           </template>

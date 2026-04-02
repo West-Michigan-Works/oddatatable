@@ -49,6 +49,9 @@ import {
   getPrecision,
   generateRandomString,
   sortArrayByProperty,
+  parseFlowBoolean,
+  extractFieldsFromExpression,
+  evaluateExpression,
 } from 'c/odDatatableUtils';
 import OdDatatableFlow from 'c/odDatatableFlow';
 
@@ -110,6 +113,10 @@ export default class ODDatatable extends LightningElement {
   @api listenToPlatformEvent;
   @api platformEventMatchingFieldName;
   @api platformEventMatchingId;
+
+  // page record for expression-based column visibility
+  @api pageRecordId;
+  @api pageRecordObjectName;
 
   // preview
   @api preview = false;
@@ -191,6 +198,10 @@ export default class ODDatatable extends LightningElement {
 
   // grouping
   _collapsedRecordsByGroupId = {};
+
+  // expression-based column visibility
+  _pageRecord = {};
+  _expressionFields = [];
 
   // =================================================================
   // validate flow method
@@ -400,7 +411,7 @@ export default class ODDatatable extends LightningElement {
   }
 
   get showAddButton() {
-    return this.canAdd === YES_NO.YES;
+    return parseFlowBoolean(this.canAdd);
   }
 
   get addHasLabel() {
@@ -408,7 +419,7 @@ export default class ODDatatable extends LightningElement {
   }
 
   get showBulkDeleteButton() {
-    return this.canBulkDelete === YES_NO.YES;
+    return parseFlowBoolean(this.canBulkDelete);
   }
 
   get bulkDeleteHasLabel() {
@@ -416,15 +427,15 @@ export default class ODDatatable extends LightningElement {
   }
 
   get showColumnRowNumber() {
-    return this.showRowNumberColumn === YES_NO.YES && !this.showGrouping && !this._anySummarizedColumn;
+    return parseFlowBoolean(this.showRowNumberColumn) && !this.showGrouping && !this._anySummarizedColumn;
   }
 
   get selectionDisabled() {
     return (
-      this.canBulkDelete === YES_NO.NO &&
-      this.canBulkEdit === YES_NO.NO &&
+      !parseFlowBoolean(this.canBulkDelete) &&
+      !parseFlowBoolean(this.canBulkEdit) &&
       this.otherBulkFlowButtons.length === 0 &&
-      this.canSelect === YES_NO.NO
+      !parseFlowBoolean(this.canSelect)
     );
   }
 
@@ -433,11 +444,11 @@ export default class ODDatatable extends LightningElement {
   }
 
   get _isSelectionRequired() {
-    return this.selectionRequired === YES_NO.YES;
+    return parseFlowBoolean(this.selectionRequired);
   }
 
   get maxiumRowSelection() {
-    if (this.canBulkDelete === YES_NO.YES || this.canBulkEdit === YES_NO.YES || this.otherBulkFlowButtons.length > 0) {
+    if (parseFlowBoolean(this.canBulkDelete) || parseFlowBoolean(this.canBulkEdit) || this.otherBulkFlowButtons.length > 0) {
       return undefined;
     }
 
@@ -453,7 +464,7 @@ export default class ODDatatable extends LightningElement {
   }
 
   get showBulkEditButton() {
-    return this.canBulkEdit === YES_NO.YES;
+    return parseFlowBoolean(this.canBulkEdit);
   }
 
   get bulkEditHasLabel() {
@@ -461,31 +472,31 @@ export default class ODDatatable extends LightningElement {
   }
 
   get _editInline() {
-    return this.canEdit === YES_NO.YES && this.editType === INLINE_FLOW.INLINE;
+    return parseFlowBoolean(this.canEdit) && this.editType === INLINE_FLOW.INLINE;
   }
 
   get _editWithFlow() {
-    return this.canEdit === YES_NO.YES && this.editType === INLINE_FLOW.FLOW;
+    return parseFlowBoolean(this.canEdit) && this.editType === INLINE_FLOW.FLOW;
   }
 
   get _addInline() {
-    return this.canAdd === YES_NO.YES && this.addType === INLINE_FLOW.INLINE;
+    return parseFlowBoolean(this.canAdd) && this.addType === INLINE_FLOW.INLINE;
   }
 
   get _addWithFlow() {
-    return this.canAdd === YES_NO.YES && this.addType === INLINE_FLOW.FLOW;
+    return parseFlowBoolean(this.canAdd) && this.addType === INLINE_FLOW.FLOW;
   }
 
   get isInlineSave() {
-    return this.inlineSave === YES_NO.YES;
+    return parseFlowBoolean(this.inlineSave);
   }
 
   get _navigateNextAfterSave() {
-    return this.navigateNextAfterSave === YES_NO.YES;
+    return parseFlowBoolean(this.navigateNextAfterSave);
   }
 
   get _canDelete() {
-    return this.canDelete === YES_NO.YES;
+    return parseFlowBoolean(this.canDelete);
   }
 
   get hasChanges() {
@@ -552,7 +563,7 @@ export default class ODDatatable extends LightningElement {
   }
 
   get _listeningToPlatformEvent() {
-    return this.listenToPlatformEvent === YES_NO.YES;
+    return parseFlowBoolean(this.listenToPlatformEvent);
   }
 
   get isThereAnyButton() {
@@ -567,7 +578,7 @@ export default class ODDatatable extends LightningElement {
   }
 
   get showPagination() {
-    return this.pagination === YES_NO.YES && this.totalPages > 1;
+    return parseFlowBoolean(this.pagination) && this.totalPages > 1;
   }
 
   get _pageSizeNumber() {
@@ -599,8 +610,9 @@ export default class ODDatatable extends LightningElement {
     return result;
   }
 
+  @api
   get displayTableData() {
-    return this.displayNoRecordsMessage === YES_NO.NO || this.tableData.length > 0;
+    return (!this.displayNoRecordsMessage.value || this._tableData?.length);
   }
 
   get isFirstPage() {
@@ -612,19 +624,19 @@ export default class ODDatatable extends LightningElement {
   }
 
   get showGrouping() {
-    return this.grouping === YES_NO.YES;
+    return parseFlowBoolean(this.grouping);
   }
 
   get _showTotalsByGroup() {
-    return this.showTotalsByGroup === YES_NO.YES;
+    return parseFlowBoolean(this.showTotalsByGroup);
   }
 
   get _canCollapseGroups() {
-    return this.canCollapseGroups === YES_NO.YES;
+    return parseFlowBoolean(this.canCollapseGroups);
   }
 
   get _recalculateLive() {
-    return this.recalculateLive === YES_NO.YES;
+    return parseFlowBoolean(this.recalculateLive);
   }
 
   get selectedRowsIds() {
@@ -652,7 +664,7 @@ export default class ODDatatable extends LightningElement {
   }
 
   get _saveAllOrNone() {
-    return this.saveAllOrNone === YES_NO.YES;
+    return parseFlowBoolean(this.saveAllOrNone);
   }
 
   // =================================================================
@@ -828,7 +840,7 @@ export default class ODDatatable extends LightningElement {
     }
 
     // filter custom column field types
-    if (this.isInlineSave || this.canEdit === YES_NO.NO || this._editWithFlow) {
+    if (this.isInlineSave || !parseFlowBoolean(this.canEdit) || this._editWithFlow) {
       columnsConfiguration = columnsConfiguration.filter(
         (col) =>
           (col.typeAttributes.config.isCustom && !CUSTOM_FIELD_TYPES.includes(col.typeAttributes.type)) ||
@@ -837,7 +849,7 @@ export default class ODDatatable extends LightningElement {
     }
 
     // set editable to all false if the whole table is not editable or if the edit type is Flow
-    if (this.canEdit === YES_NO.NO || this._editWithFlow) {
+    if (!parseFlowBoolean(this.canEdit) || this._editWithFlow) {
       columnsConfiguration.forEach((col) => {
         col.typeAttributes.editable = false;
       });
@@ -930,11 +942,22 @@ export default class ODDatatable extends LightningElement {
     }
 
     // check for hidden property
+    // collect expression fields needed for page record evaluation
+    const expressionFields = [];
     columnsConfiguration.forEach((col) => {
       if (col.typeAttributes.config && col.typeAttributes.config.hidden) {
-        // if it's not a record based condition, hide it
         if (col.typeAttributes.config.hiddenType !== HIDDEN_TYPE_OPTIONS.RECORD.value) {
-          col.hidden = true;
+          if (col.typeAttributes.config.hiddenType === HIDDEN_TYPE_OPTIONS.FLOW_VARIABLE.value) {
+            col.hidden = parseFlowBoolean(col.typeAttributes.config.hiddenConditionVariable);
+          } else if (col.typeAttributes.config.hiddenType === HIDDEN_TYPE_OPTIONS.EXPRESSION.value) {
+            const expr = col.typeAttributes.config.hiddenConditionExpression;
+            if (expr) {
+              expressionFields.push(...extractFieldsFromExpression(expr));
+              col.hidden = evaluateExpression(expr, this._pageRecord);
+            }
+          } else {
+            col.hidden = true;
+          }
         }
       }
 
@@ -944,6 +967,37 @@ export default class ODDatatable extends LightningElement {
 
     this._allColumns = columnsConfiguration;
     this.columnsToShow = columnsConfiguration.filter((cl) => !cl.hidden);
+
+    // if there are expression fields and a page record id, fetch the page record
+    const uniqueFields = [...new Set(expressionFields)];
+    const effectiveRecordId = this.pageRecordId;
+    if (uniqueFields.length > 0 && effectiveRecordId && Object.keys(this._pageRecord).length === 0) {
+      this._expressionFields = uniqueFields;
+      this._fetchPageRecord(columnsFromObject);
+    }
+  }
+
+  _fetchPageRecord(columnsFromObject) {
+    const objectNameForQuery = this.pageRecordObjectName || this.objectName;
+    const fields = this._expressionFields.map((f) => `${objectNameForQuery}.${f}`).join(',');
+    getRecords({
+      withSharing: this._withSharing,
+      objectName: objectNameForQuery,
+      fields: fields,
+      fieldNameFilter: 'Id',
+      idsToQuery: [this.pageRecordId],
+    })
+      .then((data) => {
+        if (data && data.length > 0) {
+          this._pageRecord = data[0];
+          // rebuild columns now that page record data is available
+          this._buildColumns(columnsFromObject);
+        }
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-console
+        console.warn('Failed to fetch page record for expression evaluation:', reduceErrors(error));
+      });
   }
 
   _doUpdateRecord(recordIndex, newObject, isAdd = false) {

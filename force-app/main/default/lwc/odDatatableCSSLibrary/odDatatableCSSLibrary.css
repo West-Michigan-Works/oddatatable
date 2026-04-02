@@ -1,5 +1,5 @@
 .help-text {
-  padding-left: 0.25rem;
+  padding-left: var(--slds-g-spacing-1, 0.25rem);
   margin-top: -4px;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .columnsTable tr {
-  border: var(--lwc-borderWidthThin, 1px) solid
+  border: var(--slds-g-sizing-border-1, var(--lwc-borderWidthThin, 1px)) solid
     var(--slds-g-color-border-base-1, var(--lwc-colorBorder, rgb(229, 229, 229)));
 }
 
@@ -37,12 +37,8 @@
 
 .columnsTable th:not(:last-child),
 .columnsTable td:not(:last-child) {
-  border-right: var(--lwc-borderWidthThin, 1px) solid
+  border-right: var(--slds-g-sizing-border-1, var(--lwc-borderWidthThin, 1px)) solid
     var(--slds-g-color-border-base-1, var(--lwc-colorBorder, rgb(229, 229, 229)));
-}
-
-.icon-inside-table-row {
-  --lwc-squareIconMediumContentAlt: 1.25rem;
 }
 
 .deleted-record {

@@ -4,9 +4,11 @@ import getRecordsRelatedList from '@salesforce/apex/OD_DatatableRecordsControlle
 import getConfigurationRelatedList from '@salesforce/apex/OD_DatatableConfigurationController.getConfigurationRelatedList';
 import { generateRandomString, reduceErrors } from 'c/odDatatableUtils';
 import { GROUPING_SOURCE, SHARING_CONTEXT, SORT_DIRECTION, YES_NO } from 'c/odDatatableConstants';
+import getLockStatus from '@salesforce/apex/OD_DatatableConfigurationController.getLockStatus';
 
 export default class OdDatatableRelatedList extends LightningElement {
   @api recordId;
+  @api objectApiName;
   @api relatedObjectApiName;
   @api fieldApiName;
   @api customMetadataName;
@@ -17,6 +19,9 @@ export default class OdDatatableRelatedList extends LightningElement {
   _configurationJson;
 
   isLoading = true;
+
+  @track
+  isLocked = false;
   errorMessage = false;
 
   // =================================================================
@@ -33,6 +38,23 @@ export default class OdDatatableRelatedList extends LightningElement {
       this.isLoading = false;
       this.errorMessage = reduceErrors(result.error);
     }
+  }
+
+  @track
+  _lockStatusInitialized = false;
+
+  renderedCallback() {
+    if (!this._lockStatusInitialized && this.recordId) {
+      this._fetchLockStatus();
+    }
+  }
+
+  _fetchLockStatus() {
+    getLockStatus({ objectId: this.recordId })
+      .then((result) => {
+        this.isLocked = result;
+        this._lockStatusInitialized = true;
+      });
   }
 
   // get the data
@@ -53,6 +75,10 @@ export default class OdDatatableRelatedList extends LightningElement {
       this.isLoading = false;
       this.errorMessage = reduceErrors(result.error);
     }
+  }
+
+  get isLoaded() {
+    return this.data && this._lockStatusInitialized;
   }
 
   // =================================================================
@@ -115,8 +141,10 @@ export default class OdDatatableRelatedList extends LightningElement {
     return this._configuration.showRowNumberColumn ? this._configuration.showRowNumberColumn.value : YES_NO.NO;
   }
 
+  @api
   get canAdd() {
-    return this._configuration.canAdd ? this._configuration.canAdd.value : YES_NO.NO;
+    //return this._configuration.canAdd ? this._configuration.canAdd.value : YES_NO.NO;
+    return !this.isLocked;
   }
 
   get addLabel() {
@@ -135,8 +163,10 @@ export default class OdDatatableRelatedList extends LightningElement {
     return this._configuration.addFlowInputVariables ? this._configuration.addFlowInputVariables.value : '';
   }
 
+  @api
   get canEdit() {
-    return this._configuration.canEdit ? this._configuration.canEdit.value : YES_NO.NO;
+    // return this._configuration.canEdit ? this._configuration.canEdit.value : YES_NO.NO;
+    return !this.isLocked;
   }
 
   get editType() {
@@ -155,8 +185,10 @@ export default class OdDatatableRelatedList extends LightningElement {
     return this._configuration.editFlowInputVariables ? this._configuration.editFlowInputVariables.value : '';
   }
 
+  @api
   get canDelete() {
-    return this._configuration.canDelete ? this._configuration.canDelete.value : YES_NO.NO;
+    // return this._configuration.canDelete ? this._configuration.canDelete.value : YES_NO.NO;
+    return !this.isLocked;
   }
 
   get canBulkDelete() {
@@ -187,8 +219,10 @@ export default class OdDatatableRelatedList extends LightningElement {
     return this._configuration.selectionRequired ? this._configuration.selectionRequired.value : YES_NO.NO;
   }
 
+  @api
   get inlineSave() {
-    return this._configuration.inlineSave ? this._configuration.inlineSave.value : YES_NO.NO;
+    // return this._configuration.inlineSave ? this._configuration.inlineSave.value : YES_NO.NO;
+    return !this.isLocked;
   }
 
   get saveLabel() {

@@ -2,9 +2,9 @@
   <!-- Preview -->
   <template lwc:if={columnsConfigured}>
     <div class="slds-m-top_small slds-m-bottom_x-small banner-section">
-      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around--small">Preview</h1>
+      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around_small">Preview</h1>
     </div>
-    <fieldset class="slds-box slds-align--absolute-center">
+    <fieldset class="slds-box slds-align_absolute-center">
       <lightning-button
         label="Preview Datatable"
         icon-name="utility:preview"
@@ -16,7 +16,7 @@
   </template>
 
   <div class="slds-m-top_small slds-m-bottom_x-small banner-section">
-    <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around--small">Columns and Data</h1>
+    <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around_small">Columns and Data</h1>
   </div>
 
   <!-- Object and columns -->
@@ -40,7 +40,7 @@
     >
     </c-od-datatable-input-generic>
     <template lwc:if={isObjectSelected}>
-      <div class="slds-m-top--small">
+      <div class="slds-m-top_small">
         <lightning-button
           label="Configure Columns"
           icon-name="utility:table"
@@ -65,7 +65,7 @@
         field-name="tableData"
         type={inputValues.tableData.type}
         editable
-        class="slds-size--1-of-1"
+        class="slds-size_1-of-1"
         value={inputValues.tableData.value}
         options={dataCollectionOptions}
         placeholder="Select source data..."
@@ -81,7 +81,7 @@
         field-name="noRecordsMessage"
         type={inputValues.noRecordsMessage.type}
         editable
-        class="slds-size--1-of-1"
+        class="slds-size_1-of-1"
         value={inputValues.noRecordsMessage.value}
         label={inputValues.noRecordsMessage.label}
         onupdatefield={handleInputChange}
@@ -94,7 +94,7 @@
         editable
         toggle-value-active={yesNo.YES}
         toggle-value-inactive={yesNo.NO}
-        class="slds-size--1-of-1"
+        class="slds-size_1-of-1"
         value={inputValues.displayNoRecordsMessage.value}
         label={inputValues.displayNoRecordsMessage.label}
         onupdatefield={handleInputChange}
@@ -107,7 +107,7 @@
         editable={showRowNumberEditable}
         toggle-value-active={yesNo.YES}
         toggle-value-inactive={yesNo.NO}
-        class="slds-size--1-of-1"
+        class="slds-size_1-of-1"
         value={inputValues.showRowNumberColumn.value}
         label={inputValues.showRowNumberColumn.label}
         onupdatefield={handleInputChange}
@@ -124,7 +124,7 @@
         type={inputValues.sharingContext.type}
         editable
         options={sharingContextOptions}
-        class="slds-size--1-of-1"
+        class="slds-size_1-of-1"
         value={inputValues.sharingContext.value}
         label={inputValues.sharingContext.label}
         onupdatefield={handleInputChange}
@@ -133,8 +133,28 @@
       </c-od-datatable-input-generic>
     </fieldset>
 
+    <!-- Page Record Id (for expression-based column visibility) -->
+    <fieldset class="slds-box slds-grid slds-wrap">
+      <legend>Page Record</legend>
+      <c-od-datatable-input-generic
+        field-name="pageRecordId"
+        type={fieldTypes.SELECT}
+        editable
+        options={matchingIdOptions}
+        class="slds-size_1-of-1"
+        value={inputValues.pageRecordId.value}
+        label={inputValues.pageRecordId.label}
+        onupdatefield={handleInputChange}
+        opened={dropdowns.pageRecordId}
+        help-text={inputValues.pageRecordId.helpText}
+        onfocusdropdown={handleOnFocusDropdown}
+        onblurdropdown={handleOnBlurDropdown}
+      >
+      </c-od-datatable-input-generic>
+    </fieldset>
+
     <div class="slds-m-top_small slds-m-bottom_x-small banner-section">
-      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around--small">Pagination</h1>
+      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around_small">Pagination</h1>
     </div>
 
     <!-- Pagination -->
@@ -146,7 +166,7 @@
         editable
         toggle-value-active={yesNo.YES}
         toggle-value-inactive={yesNo.NO}
-        class="slds-size--1-of-1"
+        class="slds-size_1-of-1"
         value={inputValues.pagination.value}
         label={inputValues.pagination.label}
         onupdatefield={handleInputChange}
@@ -159,7 +179,7 @@
           type={inputValues.pageSize.type}
           editable
           scale="0"
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.pageSize.value}
           label={inputValues.pageSize.label}
           onupdatefield={handleInputChange}
@@ -171,7 +191,7 @@
           type={fieldTypes.SELECT}
           editable
           options={paginationAlignmentOptions}
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.paginationAlignment.value}
           label={inputValues.paginationAlignment.label}
           required
@@ -188,7 +208,7 @@
           editable
           toggle-value-active={yesNo.YES}
           toggle-value-inactive={yesNo.NO}
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.paginationShowOptions.value}
           label={inputValues.paginationShowOptions.label}
           onupdatefield={handleInputChange}
@@ -200,7 +220,7 @@
 
     <!-- Selection -->
     <div class="slds-m-top_small slds-m-bottom_x-small banner-section">
-      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around--small">Selection</h1>
+      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around_small">Selection</h1>
     </div>
 
     <fieldset class="slds-box slds-grid slds-wrap">
@@ -211,7 +231,7 @@
         editable={canSelectEditable}
         toggle-value-active={yesNo.YES}
         toggle-value-inactive={yesNo.NO}
-        class="slds-size--1-of-1"
+        class="slds-size_1-of-1"
         value={inputValues.canSelect.value}
         label={inputValues.canSelect.label}
         onupdatefield={handleInputChange}
@@ -224,7 +244,7 @@
           type={inputValues.selectionType.type}
           editable={canSelectEditable}
           options={selectionTypeOptions}
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.selectionType.value}
           label={inputValues.selectionType.label}
           onupdatefield={handleInputChange}
@@ -237,7 +257,7 @@
           editable={canSelectEditable}
           toggle-value-active={yesNo.YES}
           toggle-value-inactive={yesNo.NO}
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.selectionRequired.value}
           label={inputValues.selectionRequired.label}
           onupdatefield={handleInputChange}
@@ -248,7 +268,7 @@
           field-name="initiallySelectedRows"
           type={inputValues.initiallySelectedRows.type}
           editable={canSelectEditable}
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.initiallySelectedRows.value}
           options={dataCollectionOptions}
           placeholder="Select source data..."
@@ -265,7 +285,7 @@
 
     <!-- Grouping -->
     <div class="slds-m-top_small slds-m-bottom_x-small banner-section">
-      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around--small">Grouping and Summarize</h1>
+      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around_small">Grouping and Summarize</h1>
     </div>
 
     <fieldset class="slds-box slds-grid slds-wrap">
@@ -276,7 +296,7 @@
         editable
         toggle-value-active={yesNo.YES}
         toggle-value-inactive={yesNo.NO}
-        class="slds-size--1-of-1"
+        class="slds-size_1-of-1"
         value={inputValues.grouping.value}
         label={inputValues.grouping.label}
         onupdatefield={handleInputChange}
@@ -289,7 +309,7 @@
           type={fieldTypes.SELECT}
           editable
           options={groupingFieldOptions}
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.groupingField.value}
           label={inputValues.groupingField.label}
           required
@@ -307,7 +327,7 @@
               type={inputValues.groupingSource.type}
               editable
               options={groupingSourceOptions}
-              class="slds-size--1-of-1"
+              class="slds-size_1-of-1"
               value={inputValues.groupingSource.value}
               label={inputValues.groupingSource.label}
               onupdatefield={handleInputChange}
@@ -321,7 +341,7 @@
                 editable
                 toggle-value-active={yesNo.YES}
                 toggle-value-inactive={yesNo.NO}
-                class="slds-size--1-of-1"
+                class="slds-size_1-of-1"
                 value={inputValues.showEmptyGroups.value}
                 label={inputValues.showEmptyGroups.label}
                 onupdatefield={handleInputChange}
@@ -336,7 +356,7 @@
               type={fieldTypes.SELECT}
               editable
               options={groupingSortFieldOptions}
-              class="slds-size--1-of-1"
+              class="slds-size_1-of-1"
               value={inputValues.groupSortField.value}
               label={inputValues.groupSortField.label}
               required
@@ -353,7 +373,7 @@
             type={fieldTypes.SELECT}
             editable
             options={sortDirectionOptions}
-            class="slds-size--1-of-1"
+            class="slds-size_1-of-1"
             value={inputValues.groupSortDirection.value}
             label={inputValues.groupSortDirection.label}
             opened={dropdowns.groupSortDirection}
@@ -369,7 +389,7 @@
             type={fieldTypes.SELECT}
             editable
             options={groupContentSortFieldOptions}
-            class="slds-size--1-of-1"
+            class="slds-size_1-of-1"
             value={inputValues.groupContentSortField.value}
             label={inputValues.groupContentSortField.label}
             opened={dropdowns.groupContentSortField}
@@ -384,7 +404,7 @@
             type={fieldTypes.SELECT}
             editable
             options={sortDirectionOptions}
-            class="slds-size--1-of-1"
+            class="slds-size_1-of-1"
             value={inputValues.groupContentSortDirection.value}
             label={inputValues.groupContentSortDirection.label}
             opened={dropdowns.groupContentSortDirection}
@@ -400,7 +420,7 @@
             editable
             toggle-value-active={yesNo.YES}
             toggle-value-inactive={yesNo.NO}
-            class="slds-size--1-of-1"
+            class="slds-size_1-of-1"
             value={inputValues.canCollapseGroups.value}
             label={inputValues.canCollapseGroups.label}
             onupdatefield={handleInputChange}
@@ -422,7 +442,7 @@
             editable
             toggle-value-active={yesNo.YES}
             toggle-value-inactive={yesNo.NO}
-            class="slds-size--1-of-1"
+            class="slds-size_1-of-1"
             value={inputValues.showTotalsByGroup.value}
             label={inputValues.showTotalsByGroup.label}
             onupdatefield={handleInputChange}
@@ -436,7 +456,7 @@
           editable
           toggle-value-active={yesNo.YES}
           toggle-value-inactive={yesNo.NO}
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.recalculateLive.value}
           label={inputValues.recalculateLive.label}
           onupdatefield={handleInputChange}
@@ -447,20 +467,20 @@
     </template>
 
     <div class="slds-m-top_small slds-m-bottom_x-small banner-section">
-      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around--small">Add, Edit and Delete</h1>
+      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around_small">Add, Edit and Delete</h1>
     </div>
 
     <!-- Adding Records -->
     <fieldset class="slds-box slds-grid slds-wrap">
       <legend>Adding Records</legend>
-      <div class="slds-size--1-of-1 slds-grid slds-wrap">
+      <div class="slds-size_1-of-1 slds-grid slds-wrap">
         <c-od-datatable-input-generic
           field-name="canAdd"
           type={inputValues.canAdd.type}
           editable
           toggle-value-active={yesNo.YES}
           toggle-value-inactive={yesNo.NO}
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.canAdd.value}
           label={inputValues.canAdd.label}
           onupdatefield={handleInputChange}
@@ -472,20 +492,20 @@
             field-name="addLabel"
             type={inputValues.addLabel.type}
             editable
-            class="slds-size--1-of-1"
+            class="slds-size_1-of-1"
             value={inputValues.addLabel.value}
             label={inputValues.addLabel.label}
             onupdatefield={handleInputChange}
             help-text={inputValues.addLabel.helpText}
           >
           </c-od-datatable-input-generic>
-          <div class="slds-size--1-of-1 slds-grid slds-wrap">
+          <div class="slds-size_1-of-1 slds-grid slds-wrap">
             <c-od-datatable-input-generic
               field-name="addType"
               type={inputValues.addType.type}
               editable={addTypeEditable}
               options={inlineFlowOptions}
-              class="slds-size--1-of-1"
+              class="slds-size_1-of-1"
               value={inputValues.addType.value}
               label={inputValues.addType.label}
               onupdatefield={handleInputChange}
@@ -494,14 +514,14 @@
             </c-od-datatable-input-generic>
           </div>
           <template lwc:if={addFlow}>
-            <div class="slds-size--1-of-1 slds-grid slds-wrap">
+            <div class="slds-size_1-of-1 slds-grid slds-wrap">
               <c-od-datatable-input-generic
                 field-name="addFlowName"
                 type={fieldTypes.SELECT}
                 editable
                 options={flows}
                 placeholder="Select flow..."
-                class="slds-size--1-of-1"
+                class="slds-size_1-of-1"
                 value={inputValues.addFlowName.value}
                 label={inputValues.addFlowName.label}
                 required
@@ -513,13 +533,13 @@
               >
               </c-od-datatable-input-generic>
             </div>
-            <div class="slds-size--1-of-1 slds-grid slds-wrap">
+            <div class="slds-size_1-of-1 slds-grid slds-wrap">
               <lightning-button
                 label="Configure Flow Variables"
                 icon-name="utility:flow"
                 name="addFlowInputVariables"
                 onclick={handleOpenFlowInputVariables}
-                class="slds-p-around--xx-small"
+                class="slds-p-around_xx-small"
               >
               </lightning-button>
             </div>
@@ -536,7 +556,7 @@
           editable
           toggle-value-active={yesNo.YES}
           toggle-value-inactive={yesNo.NO}
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.isMasterDetail.value}
           label={inputValues.isMasterDetail.label}
           onupdatefield={handleEnableDisableMasterDetail}
@@ -544,7 +564,7 @@
         >
         </c-od-datatable-input-generic>
         <template lwc:if={isMasterDetail}>
-          <div class="slds-m-top--small">
+          <div class="slds-m-top_small">
             <lightning-button
               label="Configure Master-Detail Fields"
               icon-name="utility:insert_tag_field"
@@ -565,15 +585,15 @@
     <!-- Editing Records -->
     <fieldset class="slds-box slds-grid slds-wrap">
       <legend>Editing Records</legend>
-      <div class="slds-size--1-of-1 slds-grid slds-wrap">
-        <div class="slds-size--1-of-1 slds-grid slds-wrap">
+      <div class="slds-size_1-of-1 slds-grid slds-wrap">
+        <div class="slds-size_1-of-1 slds-grid slds-wrap">
           <c-od-datatable-input-generic
             field-name="canEdit"
             type={inputValues.canEdit.type}
             editable={canEditEditable}
             toggle-value-active={yesNo.YES}
             toggle-value-inactive={yesNo.NO}
-            class="slds-size--1-of-1"
+            class="slds-size_1-of-1"
             value={inputValues.canEdit.value}
             label={inputValues.canEdit.label}
             onupdatefield={handleInputChange}
@@ -585,7 +605,7 @@
               field-name="editType"
               type={inputValues.editType.type}
               editable
-              class="slds-size--1-of-1"
+              class="slds-size_1-of-1"
               options={inlineFlowOptions}
               value={inputValues.editType.value}
               label={inputValues.editType.label}
@@ -597,12 +617,12 @@
         </div>
         <template lwc:if={canEdit}>
           <template lwc:if={editFlow}>
-            <div class="slds-size--1-of-1 slds-grid slds-wrap">
+            <div class="slds-size_1-of-1 slds-grid slds-wrap">
               <c-od-datatable-input-generic
                 field-name="editLabel"
                 type={inputValues.editLabel.type}
                 editable
-                class="slds-size--1-of-1"
+                class="slds-size_1-of-1"
                 value={inputValues.editLabel.value}
                 label={inputValues.editLabel.label}
                 onupdatefield={handleInputChange}
@@ -610,14 +630,14 @@
               >
               </c-od-datatable-input-generic>
             </div>
-            <div class="slds-size--1-of-1 slds-grid slds-wrap">
+            <div class="slds-size_1-of-1 slds-grid slds-wrap">
               <c-od-datatable-input-generic
                 field-name="editFlowName"
                 type={fieldTypes.SELECT}
                 editable
                 options={flows}
                 placeholder="Select flow..."
-                class="slds-size--1-of-1"
+                class="slds-size_1-of-1"
                 value={inputValues.editFlowName.value}
                 label={inputValues.editFlowName.label}
                 onupdatefield={handleInputChange}
@@ -629,26 +649,26 @@
               >
               </c-od-datatable-input-generic>
             </div>
-            <div class="slds-size--1-of-1 slds-grid slds-wrap">
+            <div class="slds-size_1-of-1 slds-grid slds-wrap">
               <lightning-button
                 label="Configure Flow Variables"
                 icon-name="utility:flow"
                 name="editFlowInputVariables"
-                class="slds-p-around--xx-small"
+                class="slds-p-around_xx-small"
                 onclick={handleOpenFlowInputVariables}
               >
               </lightning-button>
             </div>
           </template>
           <template lwc:if={editInline}>
-            <div class="slds-size--1-of-1 slds-grid slds-wrap">
+            <div class="slds-size_1-of-1 slds-grid slds-wrap">
               <c-od-datatable-input-generic
                 field-name="canBulkEdit"
                 type={inputValues.canBulkEdit.type}
                 editable
                 toggle-value-active={yesNo.YES}
                 toggle-value-inactive={yesNo.NO}
-                class="slds-size--1-of-1"
+                class="slds-size_1-of-1"
                 value={inputValues.canBulkEdit.value}
                 label={inputValues.canBulkEdit.label}
                 onupdatefield={handleInputChange}
@@ -660,7 +680,7 @@
                   field-name="bulkEditLabel"
                   type={inputValues.bulkEditLabel.type}
                   editable
-                  class="slds-size--1-of-1"
+                  class="slds-size_1-of-1"
                   value={inputValues.bulkEditLabel.value}
                   label={inputValues.bulkEditLabel.label}
                   onupdatefield={handleInputChange}
@@ -683,7 +703,7 @@
         editable={canDeleteEditable}
         toggle-value-active={yesNo.YES}
         toggle-value-inactive={yesNo.NO}
-        class="slds-size--1-of-1"
+        class="slds-size_1-of-1"
         value={inputValues.canDelete.value}
         label={inputValues.canDelete.label}
         onupdatefield={handleInputChange}
@@ -691,14 +711,14 @@
       >
       </c-od-datatable-input-generic>
       <template lwc:if={canDelete}>
-        <div class="slds-size--1-of-1 slds-grid slds-wrap">
+        <div class="slds-size_1-of-1 slds-grid slds-wrap">
           <c-od-datatable-input-generic
             field-name="canBulkDelete"
             type={inputValues.canBulkDelete.type}
             editable
             toggle-value-active={yesNo.YES}
             toggle-value-inactive={yesNo.NO}
-            class="slds-size--1-of-1"
+            class="slds-size_1-of-1"
             value={inputValues.canBulkDelete.value}
             label={inputValues.canBulkDelete.label}
             onupdatefield={handleInputChange}
@@ -710,7 +730,7 @@
               field-name="bulkDeleteLabel"
               type={inputValues.bulkDeleteLabel.type}
               editable
-              class="slds-size--1-of-1"
+              class="slds-size_1-of-1"
               value={inputValues.bulkDeleteLabel.value}
               label={inputValues.bulkDeleteLabel.label}
               onupdatefield={handleInputChange}
@@ -723,7 +743,7 @@
     </fieldset>
 
     <div class="slds-m-top_small slds-m-bottom_x-small banner-section">
-      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around--small">Saving</h1>
+      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around_small">Saving</h1>
     </div>
 
     <!-- Saving records -->
@@ -735,7 +755,7 @@
         editable
         toggle-value-active={yesNo.YES}
         toggle-value-inactive={yesNo.NO}
-        class="slds-size--1-of-1"
+        class="slds-size_1-of-1"
         value={inputValues.inlineSave.value}
         label={inputValues.inlineSave.label}
         onupdatefield={handleInputChange}
@@ -747,7 +767,7 @@
           field-name="saveLabel"
           type={inputValues.saveLabel.type}
           editable
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.saveLabel.value}
           label={inputValues.saveLabel.label}
           onupdatefield={handleInputChange}
@@ -760,7 +780,7 @@
           editable
           toggle-value-active={yesNo.YES}
           toggle-value-inactive={yesNo.NO}
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.saveAllOrNone.value}
           label={inputValues.saveAllOrNone.label}
           onupdatefield={handleInputChange}
@@ -773,7 +793,7 @@
           editable
           toggle-value-active={yesNo.YES}
           toggle-value-inactive={yesNo.NO}
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.navigateNextAfterSave.value}
           label={inputValues.navigateNextAfterSave.label}
           onupdatefield={handleInputChange}
@@ -784,7 +804,7 @@
     </fieldset>
 
     <div class="slds-m-top_small slds-m-bottom_x-small banner-section">
-      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around--small">Automatic Refresh</h1>
+      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around_small">Automatic Refresh</h1>
     </div>
 
     <!-- Platform Event -->
@@ -796,7 +816,7 @@
         editable
         toggle-value-active={yesNo.YES}
         toggle-value-inactive={yesNo.NO}
-        class="slds-size--1-of-1"
+        class="slds-size_1-of-1"
         value={inputValues.listenToPlatformEvent.value}
         label={inputValues.listenToPlatformEvent.label}
         onupdatefield={handleInputChange}
@@ -807,7 +827,7 @@
         <c-od-datatable-input-generic
           field-name="platFormEventName"
           type={fieldTypes.STRING}
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value="OD_Refresh_Datatable__e"
           label="Platform Event Name"
           help-text="The API Name of the Platform Event that needs to be published for the component to refresh"
@@ -819,7 +839,7 @@
           editable
           options={fieldsForPlatformEvent}
           placeholder="Select Field..."
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.platformEventMatchingFieldName.value}
           label={inputValues.platformEventMatchingFieldName.label}
           onupdatefield={handleInputChange}
@@ -835,7 +855,7 @@
           type={fieldTypes.SELECT}
           editable
           options={matchingIdOptions}
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.platformEventMatchingId.value}
           label={inputValues.platformEventMatchingId.label}
           onupdatefield={handleInputChange}
@@ -851,7 +871,7 @@
 
     <!-- Export -->
     <div class="slds-m-top_small slds-m-bottom_x-small banner-section">
-      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around--small">Export</h1>
+      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around_small">Export</h1>
     </div>
 
     <fieldset class="slds-box slds-grid slds-wrap">
@@ -862,7 +882,7 @@
         editable
         toggle-value-active={yesNo.YES}
         toggle-value-inactive={yesNo.NO}
-        class="slds-size--1-of-1"
+        class="slds-size_1-of-1"
         value={inputValues.canExport.value}
         label={inputValues.canExport.label}
         onupdatefield={handleInputChange}
@@ -877,7 +897,7 @@
             editable
             toggle-value-active={yesNo.YES}
             toggle-value-inactive={yesNo.NO}
-            class="slds-size--1-of-1"
+            class="slds-size_1-of-1"
             value={inputValues.exportGroups.value}
             label={inputValues.exportGroups.label}
             onupdatefield={handleInputChange}
@@ -889,7 +909,7 @@
           field-name="exportFileName"
           type={inputValues.exportFileName.type}
           editable
-          class="slds-size--1-of-1"
+          class="slds-size_1-of-1"
           value={inputValues.exportFileName.value}
           label={inputValues.exportFileName.label}
           onupdatefield={handleInputChange}
@@ -903,7 +923,7 @@
   <!-- Configuration Copy / Paste -->
   <template lwc:if={isObjectSelected}>
     <div class="slds-m-top_small slds-m-bottom_x-small banner-section">
-      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around--small">Copy / Pase Configuration</h1>
+      <h1 class="slds-text-color_inverse slds-text-heading_medium slds-p-around_small">Copy / Pase Configuration</h1>
     </div>
 
     <!-- Copy -->
@@ -927,7 +947,7 @@
         field-name="configurationJSON"
         type={fieldTypes.TEXTAREA}
         editable
-        class="slds-size--1-of-1"
+        class="slds-size_1-of-1"
         value={configurationJSON}
         label="Configuration JSON"
         max-length="999999999"

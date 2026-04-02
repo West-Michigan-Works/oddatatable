@@ -5,11 +5,11 @@
     <c-od-datatable-spinner text={savingMessage} show={isSaving}></c-od-datatable-spinner>
     <!-- This is in case a configuration of a field has changed in Salesforce after building the table -->
     <template lwc:if={fieldsThatChanged.length}>
-      <div class="slds-m-bottom--small slds-p-bottom--x-large slds-theme--error">
-        <div class="slds-p-around--medium slds-text-heading_medium">{labels.fieldsHaveChanged}</div>
-        <ul class="slds-p-left--x-large slds-text-heading--small">
+      <div class="slds-m-bottom_small slds-p-bottom_x-large slds-theme_error">
+        <div class="slds-p-around_medium slds-text-heading_medium">{labels.fieldsHaveChanged}</div>
+        <ul class="slds-p-left_x-large slds-text-heading_small">
           <template for:each={fieldsThatChanged} for:item="fl">
-            <li key={fl.name} class="slds-list--dotted">{fl.label}</li>
+            <li key={fl.name} class="slds-list_dotted">{fl.label}</li>
           </template>
         </ul>
       </div>
@@ -17,9 +17,9 @@
 
     <!-- Export -->
     <template lwc:if={showExportButton}>
-      <div class="slds-grid slds-size--1-of-1 slds-wrap">
+      <div class="slds-grid slds-size_1-of-1 slds-wrap">
         <div
-          class="slds-col--bump-left slds-grid slds-gutters_xx-small slds-p-bottom--x-small slds-p-right--small slds-wrap"
+          class="slds-col_bump-left slds-grid slds-gutters_xx-small slds-p-bottom_x-small slds-p-right_small slds-wrap"
         >
           <lightning-button-icon
             class="exportButton"
@@ -53,7 +53,7 @@
       </c-od-datatable-custom>
     </template>
     <template lwc:else>
-      <div class="slds-p-left--xx-small slds-text-heading--small">{noRecordsMessage}</div>
+      <div class="slds-p-left_xx-small slds-text-heading_small">{noRecordsMessage}</div>
     </template>
 
     <!-- Pagination -->
@@ -100,7 +100,7 @@
     <!-- Buttons -->
     <template lwc:if={isThereAnyButton}>
       <div
-        class="slds-grid slds-p-bottom--medium slds-p-left--xx-small slds-p-top--small slds-wrap od-datatable-buttons"
+        class="slds-grid slds-p-bottom_medium slds-p-left_xx-small slds-p-top_small slds-wrap od-datatable-buttons"
       >
         <!-- Add button -->
         <template lwc:if={showAddButton}>
@@ -108,7 +108,7 @@
             <lightning-button
               label={addLabel}
               title={addLabel}
-              class="slds-m-bottom--small slds-m-right--medium"
+              class="slds-m-bottom_small slds-m-right_medium"
               icon-name="utility:add"
               onclick={handleAdd}
               variant="brand"
@@ -120,7 +120,7 @@
             <lightning-button-icon
               icon-name="utility:add"
               alternative-text="Add"
-              class="slds-m-bottom--small slds-m-right--medium"
+              class="slds-m-bottom_small slds-m-right_medium"
               title="Add"
               onclick={handleAdd}
               variant="brand"
@@ -134,7 +134,7 @@
         <template lwc:if={showBulkDeleteButton}>
           <template lwc:if={bulkDeleteHasLabel}>
             <lightning-button
-              class="slds-m-bottom--small slds-m-right--medium"
+              class="slds-m-bottom_small slds-m-right_medium"
               label={bulkDeleteLabel}
               title={bulkDeleteLabel}
               icon-name="utility:delete"
@@ -145,7 +145,7 @@
           </template>
           <template lwc:else>
             <lightning-button-icon
-              class="slds-m-bottom--small slds-m-right--medium"
+              class="slds-m-bottom_small slds-m-right_medium"
               icon-name="utility:delete"
               alternative-text={bulkDeleteLabel}
               title={bulkDeleteLabel}
@@ -160,7 +160,7 @@
         <template lwc:if={showBulkEditButton}>
           <template lwc:if={bulkEditHasLabel}>
             <lightning-button
-              class="slds-m-bottom--small slds-m-right--medium"
+              class="slds-m-bottom_small slds-m-right_medium"
               label={bulkEditLabel}
               title={bulkEditLabel}
               icon-name="utility:edit"
@@ -171,7 +171,7 @@
           </template>
           <template lwc:else>
             <lightning-button-icon
-              class="slds-m-bottom--small slds-m-right--medium"
+              class="slds-m-bottom_small slds-m-right_medium"
               icon-name="utility:edit"
               alternative-text={bulkEditLabel}
               title={bulkEditLabel}
@@ -187,7 +187,7 @@
           <template for:each={otherBulkFlowButtons} for:item="btn">
             <lightning-button
               key={btn.fieldName}
-              class="slds-m-bottom--small slds-m-right--medium"
+              class="slds-m-bottom_small slds-m-right_medium"
               label={btn.typeAttributes.config.bulkButtonLabel}
               title={btn.label}
               data-name={btn.fieldName}
@@ -204,7 +204,7 @@
             <template for:each={otherBottomNavButtons} for:item="btn">
               <lightning-button
                 key={btn.fieldName}
-                class="slds-m-bottom--small slds-m-right--medium"
+                class="slds-m-bottom_small slds-m-right_medium"
                 label={btn.label}
                 variant={btn.buttonVariant}
                 title={btn.label}
@@ -218,7 +218,7 @@
         </template>
         <template lwc:if={mainBottomNavButtons.length}>
           <template for:each={mainBottomNavButtons} for:item="btn">
-            <lightning-button-group key={btn.fieldName} class="slds-m-bottom--small slds-m-right--medium">
+            <lightning-button-group key={btn.fieldName} class="slds-m-bottom_small slds-m-right_medium">
               <lightning-button
                 label={btn.label}
                 variant={btn.buttonVariant}
@@ -251,9 +251,9 @@
 
       <!-- Save and cancel buttons -->
       <template lwc:if={showSaveButtons}>
-        <div class="slds-align--absolute-center slds-grid slds-wrap save-inline-buttons">
+        <div class="slds-align_absolute-center slds-grid slds-wrap save-inline-buttons">
           <lightning-button label={labels.cancel} onclick={handleCancel}> </lightning-button>
-          <lightning-button class="slds-m-left--xx-small" label={saveLabel} variant="brand" onclick={handleSave}>
+          <lightning-button class="slds-m-left_xx-small" label={saveLabel} variant="brand" onclick={handleSave}>
           </lightning-button>
         </div>
       </template>

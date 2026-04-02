@@ -1,13 +1,16 @@
 <template>
   <c-od-datatable-error error-message={errorMessage}></c-od-datatable-error>
   <c-od-datatable-spinner text="Loading" show={isLoading}></c-od-datatable-spinner>
-  <template lwc:if={data}>
+  <template lwc:if={isLoaded}>
     <c-od-datatable
       unique-table-name={uniqueTableName}
       object-name={objectName}
+      page-record-id={recordId}
+      page-record-object-name={objectApiName}
       table-data={data}
       columns={columns}
       no-records-message={noRecordsMessage}
+      display-no-records-message={displayNoRecordsMessage}
       show-row-number-column={showRowNumberColumn}
       is-master-detail="Yes"
       master-detail-configuration={masterDetailConfiguration}

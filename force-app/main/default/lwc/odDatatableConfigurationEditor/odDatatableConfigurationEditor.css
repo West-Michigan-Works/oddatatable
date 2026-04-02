@@ -1,10 +1,10 @@
 :host {
-  --lwc-brandAccessible: #3d4a82;
-  --lwc-brandAccessibleActive: #657786;
+  --slds-g-color-accent-container-1: #3d4a82;
+  --slds-g-color-accent-container-2: #657786;
 }
 
 .banner-section {
-  background-color: var(--lwc-brandAccessible);
+  background-color: var(--slds-g-color-accent-container-1, var(--lwc-brandAccessible));
 }
 
 .error-text {

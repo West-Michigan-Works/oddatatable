@@ -47,6 +47,7 @@ export default class OdConfigurationEditor extends LightningElement {
     platformEventMatchingFieldName: false,
     platformEventMatchingId: false,
     paginationAlignment: false,
+    pageRecordId: false,
     groupingField: false,
     groupSortField: false,
     groupSortDirection: false,
@@ -145,7 +146,7 @@ export default class OdConfigurationEditor extends LightningElement {
     },
     canAdd: {
       label: 'Can Add?',
-      type: FIELD_TYPES.TOGGLE,
+      type: FIELD_TYPES.STRING,
       valueType: FIELD_TYPES.STRING,
       value: YES_NO.YES,
       helpText: 'Enable the addition of records in the table',
@@ -181,7 +182,7 @@ export default class OdConfigurationEditor extends LightningElement {
     },
     canEdit: {
       label: 'Can Edit?',
-      type: FIELD_TYPES.TOGGLE,
+      type: FIELD_TYPES.STRING,
       valueType: FIELD_TYPES.STRING,
       value: YES_NO.YES,
       helpText: 'Enable the editing of records in the table.',
@@ -228,14 +229,14 @@ export default class OdConfigurationEditor extends LightningElement {
     },
     canDelete: {
       label: 'Can Delete?',
-      type: FIELD_TYPES.TOGGLE,
+      type: FIELD_TYPES.STRING,
       valueType: FIELD_TYPES.STRING,
       value: YES_NO.YES,
       helpText: 'Enable the deletion of records in the table.',
     },
     canBulkDelete: {
       label: 'Can Bulk Delete?',
-      type: FIELD_TYPES.TOGGLE,
+      type: FIELD_TYPES.STRING,
       valueType: FIELD_TYPES.STRING,
       value: YES_NO.NO,
       linked: [
@@ -266,7 +267,7 @@ export default class OdConfigurationEditor extends LightningElement {
     },
     canBulkEdit: {
       label: 'Can Bulk Edit?',
-      type: FIELD_TYPES.TOGGLE,
+      type: FIELD_TYPES.STRING,
       valueType: FIELD_TYPES.STRING,
       value: YES_NO.NO,
       linked: [
@@ -297,7 +298,7 @@ export default class OdConfigurationEditor extends LightningElement {
     },
     inlineSave: {
       label: 'Save Enabled?',
-      type: FIELD_TYPES.TOGGLE,
+      type: FIELD_TYPES.STRING,
       valueType: FIELD_TYPES.STRING,
       value: YES_NO.NO,
       helpText:
@@ -348,6 +349,13 @@ export default class OdConfigurationEditor extends LightningElement {
       valueType: FIELD_TYPES.STRING,
       helpText:
         'Variable, Constant, formula etc, that contains the matching id to use when refreshing with Platform event.',
+    },
+    pageRecordId: {
+      label: 'Page Record Id',
+      type: FIELD_TYPES.SELECT,
+      valueType: FIELD_TYPES.STRING,
+      helpText:
+        'Record Id of the page record. Used for expression-based column visibility. Map to the recordId variable when the Flow is on a record page.',
     },
     pagination: {
       label: 'Pagination Enabled?',
@@ -475,7 +483,7 @@ export default class OdConfigurationEditor extends LightningElement {
     },
     canSelect: {
       label: 'Selection Enabled?',
-      type: FIELD_TYPES.TOGGLE,
+      type: FIELD_TYPES.STRING,
       valueType: FIELD_TYPES.STRING,
       value: YES_NO.NO,
       helpText:
@@ -674,7 +682,13 @@ export default class OdConfigurationEditor extends LightningElement {
   // =================================================================
   // Set the fields with the data that was stored from the flow.
   set inputVariables(variables) {
-    this._inputVariables = variables || [];
+    const newVars = variables || [];
+    // Guard against re-initialization when variables haven't changed to prevent
+    // a reactive loop: assign → @track re-render → Flow Builder calls setter again
+    if (this._inputVariables.length > 0 && JSON.stringify(newVars) === JSON.stringify(this._inputVariables)) {
+      return;
+    }
+    this._inputVariables = newVars;
     this._initializeValues();
   }
 
@@ -700,11 +714,11 @@ export default class OdConfigurationEditor extends LightningElement {
   }
 
   get canAdd() {
-    return this.inputValues.canAdd.value === YES_NO.YES;
+    return this.inputValues.canAdd.value !== YES_NO.NO;
   }
 
   get canEdit() {
-    return this.inputValues.canEdit.value === YES_NO.YES;
+    return this.inputValues.canEdit.value !== YES_NO.NO;
   }
 
   get editInline() {
@@ -724,15 +738,15 @@ export default class OdConfigurationEditor extends LightningElement {
   }
 
   get canDelete() {
-    return this.inputValues.canDelete.value === YES_NO.YES;
+    return this.inputValues.canDelete.value !== YES_NO.NO;
   }
 
   get canBulkDelete() {
-    return this.inputValues.canBulkDelete.value === YES_NO.YES;
+    return this.inputValues.canBulkDelete.value !== YES_NO.NO;
   }
 
   get canBulkEdit() {
-    return this.inputValues.canBulkEdit.value === YES_NO.YES;
+    return this.inputValues.canBulkEdit.value !== YES_NO.NO;
   }
 
   get isMasterDetail() {
@@ -750,7 +764,7 @@ export default class OdConfigurationEditor extends LightningElement {
   }
 
   get canSelectEnabled() {
-    return this.inputValues.canSelect.value === YES_NO.YES;
+    return this.inputValues.canSelect.value !== YES_NO.NO;
   }
 
   get canEditEditable() {
@@ -762,7 +776,7 @@ export default class OdConfigurationEditor extends LightningElement {
   }
 
   get inlineSave() {
-    return this.inputValues.inlineSave.value === YES_NO.YES;
+    return this.inputValues.inlineSave.value !== YES_NO.NO;
   }
 
   get listenToPlatformEvent() {
@@ -1035,11 +1049,7 @@ export default class OdConfigurationEditor extends LightningElement {
       // get the one from variables
       const variable = this._inputVariables.find((vr) => vr.name === key);
 
-      if (
-        this.inputValues[key].value !== undefined &&
-        variable &&
-        (variable.value === undefined || this.inputValues[key].value !== variable.value)
-      ) {
+      if (this.inputValues[key].value !== undefined && ((variable && variable.value === undefined) || !variable)) {
         const detail = {
           name: key,
           newValue: this.inputValues[key].value,

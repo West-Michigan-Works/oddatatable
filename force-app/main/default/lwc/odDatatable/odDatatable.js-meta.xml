@@ -422,6 +422,21 @@
         description="The sharing context to execute the queries when using the component."
       />
 
+            <property
+        name="pageRecordId"
+        label="Page Record Id"
+        type="String"
+        role="inputOnly"
+        description="Record Id of the page record. Used for expression-based column visibility. Map to the Flow's recordId variable when on a record page."
+      />
+            <property
+        name="pageRecordObjectName"
+        label="Page Record Object Name"
+        type="String"
+        role="inputOnly"
+        description="API name of the page record's object. Used for expression-based column visibility when the datatable shows a related object. Only needed in Flow context."
+      />
+
             <!-- Hidden inputs / only used internally -->
             <property
         name="masterDetailConfiguration"

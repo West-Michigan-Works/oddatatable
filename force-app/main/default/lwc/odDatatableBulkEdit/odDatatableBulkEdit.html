@@ -9,7 +9,7 @@
     <div slot="body" class={bodyClasses}>
       <div class="slds-grid slds-wrap">
         <template for:each={fieldsToShow} for:item="fld">
-          <div key={fld.fieldName} class="slds-size--1-of-2">
+          <div key={fld.fieldName} class="slds-size_1-of-2">
             <c-od-datatable-input-generic
               type={fld.type}
               editable
@@ -36,14 +36,14 @@
       </div>
     </div>
     <div slot="footer" class="footer-popup slds-grid">
-      <div class="slds-align--absolute-center slds-size--12-of-12">
+      <div class="slds-align_absolute-center slds-size_12-of-12">
         <c-od-datatable-input-generic
           field-name="onlyEmpty"
           type={fieldTypes.TOGGLE}
           editable
           toggle-value-active=" "
           toggle-value-inactive=" "
-          class="slds-p-right--medium"
+          class="slds-p-right_medium"
           extra-label-classes="slds-align--absolute-center"
           value={onlyEmpty}
           toggle-label={labels.toggleLabel}
@@ -57,7 +57,7 @@
           label={labels.updateButton}
           title={labels.updateButton}
           onclick={handleUpdateRows}
-          class="slds-m-right--large"
+          class="slds-m-right_large"
         >
         </lightning-button>
         <lightning-button name="close" label={labels.closeButton} title={labels.closeButton} onclick={handleClose}>

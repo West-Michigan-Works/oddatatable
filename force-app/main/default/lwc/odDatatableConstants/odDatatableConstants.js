@@ -465,6 +465,14 @@ export const HIDDEN_TYPE_OPTIONS = {
     label: 'Record Based',
     value: 'record',
   },
+  FLOW_VARIABLE: {
+    label: 'Flow Variable',
+    value: 'flowVariable',
+  },
+  EXPRESSION: {
+    label: 'Expression',
+    value: 'expression',
+  },
 };
 
 export const PLATFORM_EVENT_CHANNEL_NAME = '/event/OD_Refresh_Datatable__e';
@@ -527,4 +535,9 @@ export const HEADER_ACTION_TYPES = {
 export const SHARING_CONTEXT = {
   WITH_SHARING: 'With Sharing',
   WITHOUT_SHARING: 'Without Sharing',
+};
+
+export const FLOW_BOOLEAN_VALUES = {
+  TRUE: ['true', 'True', 'TRUE', 'Yes', 'YES', 'yes', '1'],
+  FALSE: ['false', 'False', 'FALSE', 'No', 'NO', 'no', '0'],
 };

@@ -9,7 +9,7 @@
   >
     <div slot="title" class="title-popup">Configure Fields</div>
     <div slot="body" class={bodyClasses}>
-      <span class="slds-align_absolute-center slds-p-bottom--x-small">
+      <span class="slds-align_absolute-center slds-p-bottom_x-small">
         Select the Master-Detail fields for the object and the values
       </span>
       <c-od-datatable-error error-message={errorMessage}></c-od-datatable-error>
@@ -30,13 +30,13 @@
       >
       </c-od-datatable-input-generic>
       <template if:true={fieldsToDisplayTable.length}>
-        <div class="slds-m-top--medium slds-p-around--xx-small">
+        <div class="slds-m-top_medium slds-p-around_xx-small">
           <table class="columnsTable">
             <thead>
               <tr>
-                <th class="slds-p-around--x-small" style="width: 200px">Field Label</th>
-                <th class="slds-p-around--x-small" style="width: 200px">Field API Name</th>
-                <th class="slds-p-around--x-small" style="width: 200px">
+                <th class="slds-p-around_x-small" style="width: 200px">Field Label</th>
+                <th class="slds-p-around_x-small" style="width: 200px">Field API Name</th>
+                <th class="slds-p-around_x-small" style="width: 200px">
                   Value
                   <lightning-helptext
                     class="help-text"
@@ -74,7 +74,7 @@
                       </c-od-datatable-input-generic>
                     </template>
                     <template if:false={options.length}>
-                      <span class="slds-p-around--xx-small slds-m-left--xx-small">
+                      <span class="slds-p-around_xx-small slds-m-left_xx-small">
                         There aren't any Text formula, constant or variable.
                       </span>
                     </template>
@@ -87,7 +87,7 @@
       </template>
     </div>
     <div slot="footer" class="footer-popup slds-grid">
-      <div class="slds-align--absolute-center slds-size--12-of-12">
+      <div class="slds-align_absolute-center slds-size_12-of-12">
         <lightning-button
           variant="brand"
           disabled={disabledSave}
@@ -95,7 +95,7 @@
           label="Save"
           title="Save"
           onclick={handleSave}
-          class="slds-m-right--large"
+          class="slds-m-right_large"
         >
         </lightning-button>
         <lightning-button name="cancel" label="Cancel" title="Cancel" onclick={handleClose}> </lightning-button>

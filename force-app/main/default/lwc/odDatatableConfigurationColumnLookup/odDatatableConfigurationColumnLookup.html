@@ -11,7 +11,7 @@
     <div slot="title" class="title-popup">Configure Lookup</div>
     <div slot="body" class={bodyClasses}>
       <div class="slds-grid slds-wrap">
-        <fieldset class="slds-box slds-size--3-of-6" style="min-height: 92.5px">
+        <fieldset class="slds-box slds-size_3-of-6" style="min-height: 92.5px">
           <legend class="slds-grid">
             Search Group
             <lightning-helptext
@@ -25,13 +25,13 @@
             options={searchGroups}
             value={selectedSearchGroup}
             variant="label-hidden"
-            class="od-datatable-horizontal-radio slds-form-element slds-p-top--small"
+            class="od-datatable-horizontal-radio slds-form-element slds-p-top_small"
             onchange={handleSearchGroupChange}
             required
           >
           </lightning-radio-group>
         </fieldset>
-        <fieldset class="slds-box slds-size--2-of-6 slds-m-left--small">
+        <fieldset class="slds-box slds-size_2-of-6 slds-m-left_small">
           <legend class="slds-grid">
             Display Value Field
             <lightning-helptext
@@ -57,9 +57,9 @@
           </c-od-datatable-input-generic>
         </fieldset>
       </div>
-      <fieldset class="slds-box slds-grid slds-m-top--medium slds-size--1-of-1 slds-wrap">
+      <fieldset class="slds-box slds-grid slds-m-top_medium slds-size_1-of-1 slds-wrap">
         <legend>Query Configuration</legend>
-        <fieldset class="slds-box slds-size--1-of-1">
+        <fieldset class="slds-box slds-size_1-of-1">
           <legend class="slds-grid">
             Filter Condition
             <lightning-helptext
@@ -78,7 +78,7 @@
               value={addWhere.fieldWhere}
               options={fieldsForWhere}
               placeholder="Select Field..."
-              class="slds-size--2-of-6"
+              class="slds-size_2-of-6"
               onupdatefield={handleAddWhereInputChange}
               opened={dropdowns.fieldWhere}
               onfocusdropdown={handleOnFocusDropdown}
@@ -94,7 +94,7 @@
               value={addWhere.operatorWhere}
               options={operations}
               placeholder="Select Operator..."
-              class="slds-size--1-of-6"
+              class="slds-size_1-of-6"
               onupdatefield={handleAddWhereInputChange}
               opened={dropdowns.operatorWhere}
               onfocusdropdown={handleOnFocusDropdown}
@@ -106,7 +106,7 @@
               editable
               field-name={selectedField.value}
               data-name="valueWhere"
-              class="slds-size--2-of-6"
+              class="slds-size_2-of-6"
               value={addWhere.valueWhere}
               options={selectedField.options}
               onupdatefield={handleAddWhereInputChange}
@@ -125,7 +125,7 @@
               label="Add Filter"
               title="Add Filter"
               onclick={handleAddFilter}
-              class="slds-m-left--small"
+              class="slds-m-left_small"
             >
             </lightning-button>
             <c-od-datatable-input-generic
@@ -135,13 +135,13 @@
               label="Where"
               data-name="finalWhereCondition"
               value={finalWhereCondition}
-              class="slds-size--1-of-1"
+              class="slds-size_1-of-1"
               onupdatefield={handleWhereConditionChange}
             >
             </c-od-datatable-input-generic>
           </div>
         </fieldset>
-        <fieldset class="slds-box slds-m-top--medium slds-size--3-of-5">
+        <fieldset class="slds-box slds-m-top_medium slds-size_3-of-5">
           <legend>Order By Condition</legend>
           <div class="slds-grid slds-wrap alignItemsCenter">
             <c-od-datatable-input-generic
@@ -154,7 +154,7 @@
               placeholder="Select Field..."
               onupdatefield={handleAddOrderInputChange}
               opened={dropdowns.fieldOrder}
-              class="slds-size--3-of-6"
+              class="slds-size_3-of-6"
               onfocusdropdown={handleOnFocusDropdown}
               inside-popup-height={popupHeight}
               onblurdropdown={handleOnBlurDropdown}
@@ -169,7 +169,7 @@
               value={addOrder.directionOrder}
               options={directions}
               placeholder="Select Direction..."
-              class="slds-size--2-of-6"
+              class="slds-size_2-of-6"
               onupdatefield={handleAddOrderInputChange}
               opened={dropdowns.directionOrder}
               onfocusdropdown={handleOnFocusDropdown}
@@ -183,7 +183,7 @@
               label="Add Order"
               title="Add Order"
               onclick={handleAddOrder}
-              class="slds-m-left--small"
+              class="slds-m-left_small"
             >
             </lightning-button>
             <c-od-datatable-input-generic
@@ -193,13 +193,13 @@
               label="Order"
               data-name="finalOrderCondition"
               value={finalOrderCondition}
-              class="slds-size--1-of-1"
+              class="slds-size_1-of-1"
               onupdatefield={handleOrderConditionChange}
             >
             </c-od-datatable-input-generic>
           </div>
         </fieldset>
-        <fieldset class="slds-box slds-m-left--small slds-m-top--medium slds-size--1-of-5">
+        <fieldset class="slds-box slds-m-left_small slds-m-top_medium slds-size_1-of-5">
           <legend>Limit Condition</legend>
           <c-od-datatable-input-generic
             field-name="limit"
@@ -214,7 +214,7 @@
       </fieldset>
     </div>
     <div slot="footer" class="footer-popup slds-grid">
-      <div class="slds-align--absolute-center slds-size--12-of-12">
+      <div class="slds-align_absolute-center slds-size_12-of-12">
         <lightning-button
           variant="brand"
           disabled={disabledSave}
@@ -222,7 +222,7 @@
           label="Save"
           title="Save"
           onclick={handleSave}
-          class="slds-m-right--large"
+          class="slds-m-right_large"
         >
         </lightning-button>
         <lightning-button name="cancel" label="Cancel" title="Cancel" onclick={handleClose}> </lightning-button>

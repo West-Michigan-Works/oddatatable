@@ -6,10 +6,10 @@
     modal-classes="overFlowInitial onTopOfEverything"
   >
     <div slot="title" class="title-popup">Configure Header Actions</div>
-    <div slot="body" class="slds-p-around--large">
+    <div slot="body" class="slds-p-around_large">
       <fieldset class="slds-box slds-grid slds-wrap">
         <legend>Default Actions</legend>
-        <div class="slds-size--1-of-1 slds-grid slds-wrap">
+        <div class="slds-size_1-of-1 slds-grid slds-wrap">
           <c-od-datatable-input-generic
             type={fieldTypes.CHECKBOX}
             field-name="hideDefaultActions"
@@ -23,15 +23,15 @@
         </div>
       </fieldset>
       <template lwc:if={column.isEditable}>
-        <fieldset class="slds-box slds-grid slds-wrap slds-m-top--medium">
+        <fieldset class="slds-box slds-grid slds-wrap slds-m-top_medium">
           <legend>Set Value Custom Actions</legend>
           <c-od-datatable-error error-message={errorMessage}></c-od-datatable-error>
-          <div class="slds-m-bottom--large slds-m-top--medium slds-p-around--xx-small slds-size--1-of-1">
+          <div class="slds-m-bottom_large slds-m-top_medium slds-p-around_xx-small slds-size_1-of-1">
             <table class="columnsTable" style="display: table">
               <thead>
                 <tr>
-                  <th class="slds-p-around--x-small" style="width: 300px">Label</th>
-                  <th class="slds-p-around--x-small" style="width: 150px">
+                  <th class="slds-p-around_x-small" style="width: 300px">Label</th>
+                  <th class="slds-p-around_x-small" style="width: 150px">
                     Show checkmark?
                     <lightning-helptext
                       class="help-text"
@@ -39,9 +39,9 @@
                     >
                     </lightning-helptext>
                   </th>
-                  <th class="slds-p-around--x-small" style="width: 300px">Icon Name</th>
-                  <th class="slds-p-around--x-small" style="width: 300px">Value to Set</th>
-                  <th class="slds-p-around--x-small" style="width: 50px"></th>
+                  <th class="slds-p-around_x-small" style="width: 300px">Icon Name</th>
+                  <th class="slds-p-around_x-small" style="width: 300px">Value to Set</th>
+                  <th class="slds-p-around_x-small" style="width: 50px"></th>
                 </tr>
               </thead>
               <tbody class="">
@@ -63,7 +63,7 @@
                         type={fieldTypes.CHECKBOX}
                         field-name="checked"
                         data-id={action.id}
-                        class="slds-text-align--center"
+                        class="slds-text-align_center"
                         value={action.checked}
                         editable
                         onupdatefield={handleUpdateSetValueField}
@@ -95,11 +95,10 @@
                       >
                       </c-od-datatable-input-generic>
                     </td>
-                    <td class="slds-text-align--center">
+                    <td class="slds-text-align_center">
                       <lightning-button-icon
                         icon-name="utility:delete"
                         variant="bare"
-                        class="icon-inside-table-row"
                         onclick={handleDelete}
                         tooltip="Delete this header action"
                         data-id={action.id}
@@ -110,7 +109,7 @@
                 </template>
               </tbody>
             </table>
-            <div class="slds-size--1-of-1 slds-p-top--small">
+            <div class="slds-size_1-of-1 slds-p-top_small">
               <lightning-button
                 label="Add Header Action"
                 title="Add Header Action"
@@ -124,7 +123,7 @@
       </template>
     </div>
     <div slot="footer" class="footer-popup slds-grid">
-      <div class="slds-align--absolute-center slds-size--12-of-12">
+      <div class="slds-align_absolute-center slds-size_12-of-12">
         <lightning-button
           variant="brand"
           disabled={disabledSave}
@@ -132,7 +131,7 @@
           label="Save"
           title="Save"
           onclick={handleSave}
-          class="slds-m-right--large"
+          class="slds-m-right_large"
         >
         </lightning-button>
         <lightning-button name="cancel" label="Cancel" title="Cancel" onclick={handleClose}> </lightning-button>

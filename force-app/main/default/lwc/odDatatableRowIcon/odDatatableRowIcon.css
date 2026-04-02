@@ -1,8 +1,8 @@
 @import 'c/odDatatableCSSLibrary';
 
 .iconImage {
-  height: 2rem;
-  width: 3rem;
+  height: var(--slds-g-sizing-9, 2rem);
+  width: var(--slds-g-sizing-10, 3rem);
   outline: none;
 }
 
@@ -16,15 +16,15 @@
 }
 
 .iconTooltip.right {
-  margin-left: 1rem;
+  margin-left: var(--slds-g-spacing-4, 1rem);
 }
 
 .iconTooltip.left {
   right: 0;
-  margin-right: 4rem;
+  margin-right: var(--slds-g-spacing-10, 4rem);
 }
 
 .iconTooltip .slds-popover__body {
-  min-height: 3rem;
-  min-width: 4rem;
+  min-height: var(--slds-g-sizing-10, 3rem);
+  min-width: var(--slds-g-sizing-11, 4rem);
 }

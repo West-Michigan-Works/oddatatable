@@ -1,5 +1,5 @@
 .spinner-text {
-  margin-top: 5rem;
+  margin-top: var(--slds-g-spacing-12, 5rem);
   z-index: 9051;
-  color: var(--lwc-colorTextLabel, rgb(62, 62, 60));
+  color: var(--slds-g-color-info-1, var(--lwc-colorTextLabel, rgb(62, 62, 60)));
 }

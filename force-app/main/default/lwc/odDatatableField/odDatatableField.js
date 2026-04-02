@@ -94,6 +94,15 @@ export default class OdDatatableField extends LightningElement {
     if (this.config.hidden && this.config.hiddenType === HIDDEN_TYPE_OPTIONS.RECORD.value) {
       hidden = this.record[this.config.hiddenConditionField];
     }
+    // Flow variable and expression visibility are resolved at the column level in _buildColumns(),
+    // so if this field is rendering, the column is visible
+    if (
+      this.config.hidden &&
+      (this.config.hiddenType === HIDDEN_TYPE_OPTIONS.FLOW_VARIABLE.value ||
+        this.config.hiddenType === HIDDEN_TYPE_OPTIONS.EXPRESSION.value)
+    ) {
+      hidden = false;
+    }
 
     return !hidden;
   }
