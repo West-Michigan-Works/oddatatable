@@ -1,5 +1,6 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import { RefreshEvent } from 'lightning/refresh';
+import { refreshApex } from '@salesforce/apex';
 import getRecordsRelatedList from '@salesforce/apex/OD_DatatableRecordsController.getRecordsRelatedList';
 import getConfigurationRelatedList from '@salesforce/apex/OD_DatatableConfigurationController.getConfigurationRelatedList';
 import { generateRandomString, reduceErrors } from 'c/odDatatableUtils';
@@ -13,6 +14,7 @@ export default class OdDatatableRelatedList extends LightningElement {
   @api fieldApiName;
   @api customMetadataName;
   @api lockParentFields;
+  @api startReadOnly;
 
   @track data;
   @track _configuration;
@@ -20,6 +22,11 @@ export default class OdDatatableRelatedList extends LightningElement {
   _configurationJson;
 
   isLoading = true;
+
+  // read-only mode: the table only becomes editable after the user clicks Edit
+  _isEditing = false;
+  _tableKey = generateRandomString();
+  _wiredData;
 
   @track
   isLocked = false;
@@ -51,11 +58,10 @@ export default class OdDatatableRelatedList extends LightningElement {
   }
 
   _fetchLockStatus() {
-    getLockStatus({ objectId: this.recordId, parentFields: this.lockParentFields || '' })
-      .then((result) => {
-        this.isLocked = result;
-        this._lockStatusInitialized = true;
-      });
+    getLockStatus({ objectId: this.recordId, parentFields: this.lockParentFields || '' }).then((result) => {
+      this.isLocked = result;
+      this._lockStatusInitialized = true;
+    });
   }
 
   // get the data
@@ -67,6 +73,8 @@ export default class OdDatatableRelatedList extends LightningElement {
     fields: '$_fieldsToQuery',
   })
   _getData(result) {
+    this._wiredData = result;
+
     if (result.data) {
       this.isLoading = false;
       this.errorMessage = false;
@@ -80,6 +88,41 @@ export default class OdDatatableRelatedList extends LightningElement {
 
   get isLoaded() {
     return this.data && this._lockStatusInitialized;
+  }
+
+  get _startsReadOnly() {
+    return this.startReadOnly === true || this.startReadOnly === 'true';
+  }
+
+  get _isReadOnlyMode() {
+    return this._startsReadOnly && !this._isEditing;
+  }
+
+  get _editingBlocked() {
+    return this.isLocked || !this._configuration || this._isReadOnlyMode;
+  }
+
+  get showEditButton() {
+    if (!this._isReadOnlyMode || this.isLocked || !this._configuration) {
+      return false;
+    }
+
+    return ['canAdd', 'canEdit', 'canDelete'].some(
+      (option) => this._configuration[option] && this._configuration[option].value === YES_NO.YES,
+    );
+  }
+
+  get showCancelButton() {
+    return this._startsReadOnly && this._isEditing;
+  }
+
+  get showModeButtons() {
+    return this.showEditButton || this.showCancelButton;
+  }
+
+  // a new key re-creates the table, which only reads its edit settings when it is first rendered
+  get tableInstances() {
+    return [{ key: this._tableKey }];
   }
 
   // =================================================================
@@ -144,7 +187,7 @@ export default class OdDatatableRelatedList extends LightningElement {
 
   @api
   get canAdd() {
-    if (this.isLocked || !this._configuration) return false;
+    if (this._editingBlocked) return false;
     return this._configuration.canAdd ? this._configuration.canAdd.value : YES_NO.NO;
   }
 
@@ -166,7 +209,7 @@ export default class OdDatatableRelatedList extends LightningElement {
 
   @api
   get canEdit() {
-    if (this.isLocked || !this._configuration) return false;
+    if (this._editingBlocked) return false;
     return this._configuration.canEdit ? this._configuration.canEdit.value : YES_NO.NO;
   }
 
@@ -188,11 +231,12 @@ export default class OdDatatableRelatedList extends LightningElement {
 
   @api
   get canDelete() {
-    if (this.isLocked || !this._configuration) return false;
+    if (this._editingBlocked) return false;
     return this._configuration.canDelete ? this._configuration.canDelete.value : YES_NO.NO;
   }
 
   get canBulkDelete() {
+    if (this._isReadOnlyMode) return YES_NO.NO;
     return this._configuration.canBulkDelete ? this._configuration.canBulkDelete.value : YES_NO.NO;
   }
 
@@ -201,6 +245,7 @@ export default class OdDatatableRelatedList extends LightningElement {
   }
 
   get canBulkEdit() {
+    if (this._isReadOnlyMode) return YES_NO.NO;
     return this._configuration.canBulkEdit ? this._configuration.canBulkEdit.value : YES_NO.NO;
   }
 
@@ -222,7 +267,7 @@ export default class OdDatatableRelatedList extends LightningElement {
 
   @api
   get inlineSave() {
-    if (this.isLocked || !this._configuration) return false;
+    if (this._editingBlocked) return false;
     return this._configuration.inlineSave ? this._configuration.inlineSave.value : YES_NO.NO;
   }
 
@@ -358,7 +403,42 @@ export default class OdDatatableRelatedList extends LightningElement {
   // =================================================================
   // Handler methods
   // =================================================================
-  handleAfterSave() {
+  handleAfterSave(event) {
     this.dispatchEvent(new RefreshEvent());
+
+    // stay in edit mode when some rows failed, so their errors stay on screen
+    if (!this.showCancelButton || (event.detail && event.detail.success === false)) {
+      return;
+    }
+
+    // reload the rows first so the read-only table shows what was just saved
+    Promise.resolve(refreshApex(this._wiredData)).finally(() => {
+      this._isEditing = false;
+      this._remountTable();
+    });
+  }
+
+  handleEdit() {
+    this._isEditing = true;
+    this._remountTable();
+  }
+
+  handleCancel() {
+    this._clearUnsavedChanges();
+    this._isEditing = false;
+    this._remountTable();
+  }
+
+  _remountTable() {
+    this._tableKey = generateRandomString();
+  }
+
+  // the table keeps unsaved changes in session storage under its unique name after a failed save
+  _clearUnsavedChanges() {
+    try {
+      sessionStorage.removeItem(this.uniqueTableName);
+    } catch (e) {
+      // storage unavailable: nothing to clear
+    }
   }
 }
