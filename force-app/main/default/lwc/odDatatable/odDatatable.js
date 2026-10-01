@@ -448,7 +448,11 @@ export default class ODDatatable extends LightningElement {
   }
 
   get maxiumRowSelection() {
-    if (parseFlowBoolean(this.canBulkDelete) || parseFlowBoolean(this.canBulkEdit) || this.otherBulkFlowButtons.length > 0) {
+    if (
+      parseFlowBoolean(this.canBulkDelete) ||
+      parseFlowBoolean(this.canBulkEdit) ||
+      this.otherBulkFlowButtons.length > 0
+    ) {
       return undefined;
     }
 
@@ -612,7 +616,7 @@ export default class ODDatatable extends LightningElement {
 
   @api
   get displayTableData() {
-    return (!this.displayNoRecordsMessage.value || this._tableData?.length);
+    return !this.displayNoRecordsMessage.value || this._tableData?.length;
   }
 
   get isFirstPage() {
@@ -1995,8 +1999,9 @@ export default class ODDatatable extends LightningElement {
     this._tableData = result;
   }
 
-  _doDispatchAfterSave() {
-    this.dispatchEvent(new CustomEvent('aftersave'));
+  _doDispatchAfterSave(success) {
+    // success is false when some rows saved and others failed (save all or none disabled)
+    this.dispatchEvent(new CustomEvent('aftersave', { detail: { success } }));
   }
 
   _updateRecordError(recordIndex, errorInfo) {
@@ -2554,7 +2559,7 @@ export default class ODDatatable extends LightningElement {
             this._doRefreshDataAfterSave(rs.records, this.outputDeletedRows);
 
             // dispatch the after save in case this is being used inside a lightning record page with the ids of the impacted rows
-            this._doDispatchAfterSave();
+            this._doDispatchAfterSave(rs.success);
           }
 
           // if it is not a success, it means we have errors and need to highlight them
